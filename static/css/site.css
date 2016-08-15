@@ -1,0 +1,187 @@
+body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+.container {
+    max-width: 32rem;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 50px;
+}
+h1 {
+    font-size: 54px;
+    color: #333;
+    margin: 30px 0 10px;
+}
+h2 {
+    font-size: 22px;
+    color: #555;
+}
+h3 {
+    font-size: 20px;
+    color: #555;
+    padding-left: 6px;
+    border-left: 3px solid #08c;
+}
+h4 {
+    font-size: 14px;
+    font-weight: normal;
+    color: #555;
+    margin: 10px 0;
+}
+hr {
+    display: block;
+    width: 100%;
+    height: 1px;
+    margin: 2.5rem 0;
+    background-color: #eee;
+    border: 0;
+}
+a {
+    color: #08c;
+    text-decoration: none;
+}
+p {
+    font-size: 18px;
+}
+span {
+    font-size: 16px;
+    height: 22px;
+    line-height: 22px;
+    vertical-align: top;
+    padding-right: 10px;
+}
+.block {
+    padding-top: 20px;
+}
+.submit_block {
+    padding: 50px 0 40px 0;
+    text-align: center;
+}
+.button_block {
+  padding: 10px 0 8px 0;
+}
+.regular-radio {
+	display: none;
+}
+
+.regular-radio + label {
+	-webkit-appearance: none;
+	background-color: #fafafa;
+	border: 1px solid #cacece;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+	padding: 9px;
+	border-radius: 50px;
+	display: inline-block;
+	position: relative;
+  cursor: pointer;
+}
+
+.regular-radio:checked + label:after {
+	content: ' ';
+	width: 12px;
+	height: 12px;
+	border-radius: 50px;
+	position: absolute;
+	top: 3px;
+	background: #99a1a7;
+	box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.3);
+	text-shadow: 0px;
+	left: 3px;
+	font-size: 32px;
+}
+
+.regular-radio:checked + label {
+	background-color: #e9ecee;
+	border: 1px solid #adb8c0;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05), inset 15px 10px -12px rgba(255, 255, 255, 0.1), inset 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.regular-radio + label:active, .regular-radio:checked + label:active {
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+#submit_button {
+  	width: 200px;
+    height: 41px;
+    transition: border linear 0.2s, box-shadow linear 0.2s;
+    font-size: 18px;
+    display: inline-block;
+    padding: 4px;
+    color: #555;
+    text-shadow: 1px 1px 1px #ddd;
+    vertical-align: middle;
+    background-color: #ffffff;
+    border: 1px solid #e3e3e3;
+    border-radius: 3px;
+    margin: 3px 0;
+    cursor: pointer;
+}
+#submit_button:hover,
+#submit_button:focus {
+  	border-color: rgba(59, 153, 252, 0.8);
+    outline: 0;
+    outline: thin dotted \9;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(59, 153, 252, 0.6);
+}
+#submit_button:disabled {
+  	color: #555555;
+  	background-color: #e8e8e8;
+    cursor:default;
+}
+#submit_button:disabled:hover,
+#submit_button:disabled:focus {
+    border-color: rgba(232, 232, 232, 0.8);
+    outline: 0;
+    outline: thin dotted \9;
+    box-shadow: inset 0 0 0 rgba(0, 0, 0, 0.075), 0 0 0 rgba(232, 232, 232, 0.6);
+}
+.one_line {
+	width: 250px;
+	height: 20px;
+ }
+.many_lines {
+ 	width: 500px;
+	height: 300px;
+	resize: none;
+	overflow: scroll;
+ }
+.one_line,
+.many_lines{
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    transition: border linear 0.2s, box-shadow linear 0.2s;
+    font-size: 16px;
+    padding: 4px;
+    display: inline-block;
+    vertical-align: middle;
+    background-color: #fafafa;
+    border: 1px solid #e3e3e3;
+    border-radius: 3px;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075);
+}
+.one_line:focus,
+.many_lines:focus{
+    background-color: #fff;
+    border-color: rgba(59, 153, 252, 0.8);
+    outline: 0;
+    outline: thin dotted \9;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(59, 153, 252, 0.6);
+}
+.js_button,
+.jq_button {
+  -webkit-appearance: none;
+	background-color: #fafafa;
+	border: 1px solid #cacece;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+	padding: 9px;
+	border-radius: 5px;
+	display: inline-block;
+	position: relative;
+  cursor: pointer;
+  margin: 0;
+  outline: 0;
+}
+.js_button.active,
+.jq_button.active{
+  background-color: #f0f0f0;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px 1px 3px rgba(0, 0, 0, 0.1);
+}

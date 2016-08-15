@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Top 15</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="使用 Top 15 在你的网站中展示最近看过/读过/听过的电影/书/音乐！">
+    <meta name="keywords" content="Jackeriss,">
+    <link href="http://douban.jackeriss.com/css/site.css" rel="stylesheet"></link>
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://cdn.jackeriss.com/images/logo.png">
+    <link rel="shortcut icon" href="http://cdn.jackeriss.com/images/logo.png">
+    <script src="http://cdn.jackeriss.com/js/jquery.min.js"></script>
+    <script src="http://douban.jackeriss.com/js/index.js"></script>
+  </head>
+  <body>
+    <a href="https://github.com/Jackeriss/Top15" target="_blank" class="github-corner"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <div class="container">
+      <h1>Top 15</h1>
+      <h2>使用 Top 15 在你的网站中展示最近看过/读过/听过的电影/书/音乐！</h2>
+      <p>Made by <a href="http://www.jackeriss.com/" target="_blank">Jackeriss</a>. Available on <a href="https://github.com/Jackeriss/Top15" target="_blank">GitHub</a>. Licensed MIT.</p>
+      <hr>
+      <p>立即生成一个可用 iframe 调用的展示页面！</p>
+      <h3>豆瓣 ID</h3>
+      <input type="text" class="one_line"/>
+      <div class="block">
+        <h3>类型</h3>
+        <input type="radio" class="regular-radio object_type" name="radio-1-set" id="radio-1-0"/>
+        <label for="radio-1-0"></label>
+        <span>电影</span>
+        <input type="radio" class="regular-radio object_type" name="radio-1-set" id="radio-1-1"/>
+        <label for="radio-1-1"></label>
+        <span>书</span>
+        <input type="radio" class="regular-radio object_type" name="radio-1-set" id="radio-1-2"/>
+        <label for="radio-1-2"></label>
+        <span>音乐</span>
+      </div>
+      <div class="block">
+        <h3>状态</h3>
+        <input type="radio" class="regular-radio group_type" name="radio-2-set" id="radio-2-0"/>
+        <label for="radio-2-0"></label>
+        <span>看过/读过/听过</span>
+        <input type="radio" class="regular-radio group_type" name="radio-2-set" id="radio-2-1"/>
+        <label for="radio-2-1"></label>
+        <span>想看/想读/想听</span>
+        <input type="radio" class="regular-radio group_type" name="radio-2-set" id="radio-2-2"/>
+        <label for="radio-2-2"></label>
+        <span>在看/在读/在听</span>
+      </div>
+      <div class="block">
+        <h3>排序</h3>
+        <input type="radio" class="regular-radio order_by" name="radio-3-set" id="radio-3-0"/>
+        <label for="radio-3-0"></label>
+        <span>按时间排序</span>
+        <input type="radio" class="regular-radio order_by" name="radio-3-set" id="radio-3-1"/>
+        <label for="radio-3-1"></label>
+        <span>按评价排序</span>
+      </div>
+      <div class="submit_block">
+        <input type="button" class="js_button" id="submit_button" value="生成展示页面"/>
+      </div>
+      <h4>调用展示页面的代码 (如果你使用了 JQuery 建议选择 JQuery 版的代码)：</h4>
+      <div class="button_block">
+        <input type="button" class="j_button js_button" value="JavaScript版"/>
+        <input type="button" class="j_button jq_button" value="JQuery版"/>
+      </div>
+      <div class="text_block">
+        <textarea type="text" class="many_lines" placeholder="请生成展示页面后再来查看"></textarea>
+      </div>
+    </div>
+  </body>
+</html>
