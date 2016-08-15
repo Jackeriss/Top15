@@ -58,13 +58,13 @@ def check():
             return jsonify(result='1')
     return '200'
 
-@app.route('/test')
-def test():
-    return render_template('test.html')
-
 @app.route('/<path:resource>')
 def serveStaticResource(resource):
     return send_from_directory('static/', resource)
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
 
 if __name__ == '__main__':
     app.run()
