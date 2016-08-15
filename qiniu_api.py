@@ -10,21 +10,21 @@ q = Auth(ACCESS_KEY, SECRET_KEY)
 
 
 class Qiniu(object):
-    def save_file_to_qiniu(self,
-                           upload_file,
-                           filename=str(uuid.uuid1()).replace('-', ''),
-                           path='attach'):
-        try:
-            key = '%s/%s' % (path, filename)
-            token = self.q.upload_token(BUCKET_NAME, key)
-            ret, info = put_data(token, key, upload_file)
-            if ret.get('key', None) == None:
-                raise Exception('upload error')
-            else:
-                return u'%s' % key
-        except Exception, e:
-            print(str(e))
-            return str(e)
+    # def save_file_to_qiniu(self,
+    #                        upload_file,
+    #                        filename=str(uuid.uuid1()).replace('-', ''),
+    #                        path='attach'):
+    #     try:
+    #         key = '%s/%s' % (path, filename)
+    #         token = self.q.upload_token(BUCKET_NAME, key)
+    #         ret, info = put_data(token, key, upload_file)
+    #         if ret.get('key', None) == None:
+    #             raise Exception('upload error')
+    #         else:
+    #             return u'%s' % key
+    #     except Exception, e:
+    #         print str(e)
+    #         return str(e)
 
     def fetch_file_to_qiniu(self,
                             url,
@@ -39,7 +39,7 @@ class Qiniu(object):
             else:
                 return u'%s' % key
         except Exception, e:
-            print(str(e))
+            print str(e)
             return str(e)
 
     def list_file_from_qiniu(self):
