@@ -1,6 +1,6 @@
 # Top15
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE.txt)
-[![versions](https://img.shields.io/badge/versions%20-%20%201.0.0-blue.svg)]()  
+[![versions](https://img.shields.io/badge/versions%20-%20%201.0.1-blue.svg)]()  
 使用 Top 15 在你的网站中展示最近看过/读过/听过的电影/书/音乐！
 
 ## Screenshots
