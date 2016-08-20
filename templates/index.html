@@ -21,7 +21,7 @@
       <hr>
       <p>立即生成一个可用 iframe 调用的展示页面！</p>
       <h3>豆瓣 ID</h3>
-      <input type="text" class="one_line"/>
+      <input type="text" class="one_line" id="user_id"/>
       <div class="block">
         <h3>类型</h3>
         <input type="radio" class="regular-radio object_type" name="radio-1-set" id="radio-1-0"/>
@@ -54,6 +54,10 @@
         <input type="radio" class="regular-radio order_by" name="radio-3-set" id="radio-3-1"/>
         <label for="radio-3-1"></label>
         <span>按评价排序</span>
+      </div>
+      <div class="block">
+        <h3>标签</h3>
+        <input type="text" class="one_line" id="tag" placeholder="非必填"/>
       </div>
       <div class="submit_block">
         <input type="button" class="js_button" id="submit_button" value="生成展示页面"/>

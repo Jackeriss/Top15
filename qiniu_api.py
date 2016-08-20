@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
-from qiniu import Auth, put_data, BucketManager
 import os
 import uuid
+from qiniu import Auth, put_data, BucketManager
+from key import ACCESS_KEY, SECRET_KEY, BUCKET_NAME
 
-ACCESS_KEY = ''# Use your own
-SECRET_KEY = ''# Use your own
-BUCKET_NAME = ''# Use your own
 q = Auth(ACCESS_KEY, SECRET_KEY)
 
 

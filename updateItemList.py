@@ -6,16 +6,18 @@ import threading
 import json
 from bs4 import BeautifulSoup
 from qiniu_api import Qiniu
+from key import HEADERS
 
 class updateItemListThread (threading.Thread):
-    def __init__(self, user_id, object_type, group_type, order_by):
+    def __init__(self, user_id, object_type, group_type, order_by, tag):
         threading.Thread.__init__(self)
         self.user_id = user_id
         self.object_type = object_type
         self.group_type = group_type
         self.order_by = order_by
+        self.tag = tag
         self.id = self.user_id + ' ' + self.object_type + ' ' + self.group_type + \
-            ' ' + self.order_by
+            ' ' + self.order_by + ' ' + self.tag
         object_type_name = '0'
         group_type_name = '0'
         order_by_name = '0'
@@ -35,13 +37,17 @@ class updateItemListThread (threading.Thread):
             order_by_name = 'time'
         elif order_by == '1':
             order_by_name = 'rating'
+        if tag == '0':
+            tag_name = ''
+        else:
+            tag_name = tag.encode('utf-8')
         self.url = 'https://' + object_type_name + '.douban.com/people/' + \
-            user_id + '/' + group_type_name + '?sort=' + order_by_name
+            user_id + '/' + group_type_name + '?sort=' + order_by_name + \
+            '&tag=' + tag_name
     def run(self):
         self.updateItemList()
 
     def updateItemList(self):
-        HEADERS = {'cookie': ''}# Use your own
         try:
             req = urllib2.Request(self.url, headers=HEADERS)
             text = urllib2.urlopen(req).read()
