@@ -73,9 +73,9 @@ class updateItemListThread (threading.Thread):
                     itemDict['image'] = 'http://douban.jackeriss.com/images/' + imageFileName
                     items.append(itemDict)
                     if 'mpic' in src:
-                        imageURL = 'http://img3.doubanio.com/lpic/' + imageFileName
+                        imageURL = 'https://img3.doubanio.com/lpic/' + imageFileName
                     else:
-                        imageURL = 'http://img3.doubanio.com/view/photo/photo/public/' + imageFileName
+                        imageURL = 'https://img3.doubanio.com/view/photo/photo/public/' + imageFileName
                     if imageFileName not in existList:
                         Qiniu().fetch_file_to_qiniu(url=imageURL, filename=imageFileName, path='images')
             else:
@@ -93,9 +93,9 @@ class updateItemListThread (threading.Thread):
                     itemDict['image'] = 'http://douban.jackeriss.com/images/' + imageFileName
                     items.append(itemDict)
                     if 'spic' in src:
-                        imageURL = 'http://img3.doubanio.com/lpic/' + imageFileName
+                        imageURL = 'https://img3.doubanio.com/lpic/' + imageFileName
                     else:
-                        imageURL = 'http://img3.doubanio.com/view/photo/photo/public/' + imageFileName
+                        imageURL = 'https://img3.doubanio.com/view/photo/photo/public/' + imageFileName
                     if imageFileName not in existList:
                         Qiniu().fetch_file_to_qiniu(url=imageURL, filename=imageFileName, path='images')
             with open('data/' + self.id + '.json', 'w') as itemsFile:
