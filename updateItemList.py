@@ -70,7 +70,7 @@ class updateItemListThread (threading.Thread):
                     itemDict['rating'] = soupDetail.find('strong', attrs={'class':'rating_num'}).get_text()
                     src = soupDetail.find('img', attrs={'rel':'v:photo'})['src']
                     imageFileName = src.split('/')[-1]
-                    itemDict['image'] = 'http://douban.jackeriss.com/images/' + imageFileName
+                    itemDict['image'] = 'https://ocf6ectyc.qnssl.com/view/photo/photo/public/' + imageFileName
                     items.append(itemDict)
                     if 'mpic' in src:
                         imageURL = 'https://img3.doubanio.com/lpic/' + imageFileName
@@ -90,7 +90,7 @@ class updateItemListThread (threading.Thread):
                     itemDict['rating'] = soupDetail.find('strong', attrs={'class':'rating_num'}).get_text()
                     src = divs[i].find('img')['src']
                     imageFileName = src.split('/')[-1]
-                    itemDict['image'] = 'http://douban.jackeriss.com/images/' + imageFileName
+                    itemDict['image'] = 'https://ocf6ectyc.qnssl.com/view/photo/photo/public/' + imageFileName
                     items.append(itemDict)
                     if 'spic' in src:
                         imageURL = 'https://img3.doubanio.com/lpic/' + imageFileName
