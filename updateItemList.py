@@ -70,12 +70,12 @@ class updateItemListThread (threading.Thread):
                     itemDict['rating'] = soupDetail.find('strong', attrs={'class':'rating_num'}).get_text()
                     src = soupDetail.find('img', attrs={'rel':'v:photo'})['src']
                     imageFileName = src.split('/')[-1]
-                    itemDict['image'] = 'http://douban.jackeriss.com/images/' + imageFileName
+                    itemDict['image'] = 'https://ocf6ectyc.qnssl.com/view/photo/photo/public/' + imageFileName
                     items.append(itemDict)
                     if 'mpic' in src:
-                        imageURL = 'http://img3.doubanio.com/lpic/' + imageFileName
+                        imageURL = 'https://img3.doubanio.com/lpic/' + imageFileName
                     else:
-                        imageURL = 'http://img3.doubanio.com/view/photo/photo/public/' + imageFileName
+                        imageURL = 'https://img3.doubanio.com/view/photo/photo/public/' + imageFileName
                     if imageFileName not in existList:
                         Qiniu().fetch_file_to_qiniu(url=imageURL, filename=imageFileName, path='images')
             else:
@@ -90,12 +90,12 @@ class updateItemListThread (threading.Thread):
                     itemDict['rating'] = soupDetail.find('strong', attrs={'class':'rating_num'}).get_text()
                     src = divs[i].find('img')['src']
                     imageFileName = src.split('/')[-1]
-                    itemDict['image'] = 'http://douban.jackeriss.com/images/' + imageFileName
+                    itemDict['image'] = 'https://ocf6ectyc.qnssl.com/view/photo/photo/public/' + imageFileName
                     items.append(itemDict)
                     if 'spic' in src:
-                        imageURL = 'http://img3.doubanio.com/lpic/' + imageFileName
+                        imageURL = 'https://img3.doubanio.com/lpic/' + imageFileName
                     else:
-                        imageURL = 'http://img3.doubanio.com/view/photo/photo/public/' + imageFileName
+                        imageURL = 'https://img3.doubanio.com/view/photo/photo/public/' + imageFileName
                     if imageFileName not in existList:
                         Qiniu().fetch_file_to_qiniu(url=imageURL, filename=imageFileName, path='images')
             with open('data/' + self.id + '.json', 'w') as itemsFile:
