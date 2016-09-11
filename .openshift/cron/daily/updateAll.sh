@@ -1,3 +1,3 @@
 #!/bin/bash
-cd /var/lib/openshift/579477917628e19db600000d/app-root/runtime/repo
+cd $OPENSHIFT_REPO_DIR
 python updateAll.py
