@@ -44,10 +44,8 @@ class updateItemListThread (threading.Thread):
         self.url = 'https://' + object_type_name + '.douban.com/people/' + \
             user_id + '/' + group_type_name + '?sort=' + order_by_name + \
             '&tag=' + tag_name
-    def run(self):
-        self.updateItemList()
 
-    def updateItemList(self):
+    def run(self):
         try:
             req = urllib2.Request(self.url, headers=HEADERS)
             text = urllib2.urlopen(req).read()
@@ -60,9 +58,9 @@ class updateItemListThread (threading.Thread):
             existList = str(Qiniu().list_file_from_qiniu())
             if self.object_type == '1':
                 books = soup.findAll('li', attrs={'class':'subject-item'})
-                for i in range(0, len(books)):
+                for book in books:
                     itemDict = {}
-                    itemDict['link'] = books[i].find('h2').find('a')['href']
+                    itemDict['link'] = book.find('h2').find('a')['href']
                     reqDetail = urllib2.Request(itemDict['link'])
                     textDetail = urllib2.urlopen(reqDetail).read()
                     soupDetail = BeautifulSoup(textDetail, 'html.parser')
@@ -80,15 +78,15 @@ class updateItemListThread (threading.Thread):
                         Qiniu().fetch_file_to_qiniu(url=imageURL, filename=imageFileName, path='images')
             else:
                 divs = soup.findAll('div', attrs={'class':'item'})
-                for i in range(0, len(divs)):
+                for div in divs:
                     itemDict = {}
-                    itemDict['title'] = divs[i].find('em').get_text().split('/')[0].strip()
-                    itemDict['link'] = divs[i].find('a')['href']
+                    itemDict['title'] = div.find('em').get_text().split('/')[0].strip()
+                    itemDict['link'] = div.find('a')['href']
                     reqDetail = urllib2.Request(itemDict['link'])
                     textDetail = urllib2.urlopen(reqDetail).read()
                     soupDetail = BeautifulSoup(textDetail, 'html.parser')
                     itemDict['rating'] = soupDetail.find('strong', attrs={'class':'rating_num'}).get_text()
-                    src = divs[i].find('img')['src']
+                    src = div.find('img')['src']
                     imageFileName = src.split('/')[-1]
                     itemDict['image'] = 'https://ocg2nnfbz.qnssl.com/images/' + imageFileName
                     items.append(itemDict)
