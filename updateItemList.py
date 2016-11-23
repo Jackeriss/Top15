@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import urllib2
 import os
-import requests
 import threading
 import json
 from bs4 import BeautifulSoup
@@ -61,7 +60,7 @@ class updateItemListThread (threading.Thread):
                 for book in books:
                     itemDict = {}
                     itemDict['link'] = book.find('h2').find('a')['href']
-                    reqDetail = urllib2.Request(itemDict['link'])
+                    reqDetail = urllib2.Request(itemDict['link'], headers=HEADERS)
                     textDetail = urllib2.urlopen(reqDetail).read()
                     soupDetail = BeautifulSoup(textDetail, 'html.parser')
                     itemDict['title'] = soupDetail.find('span', attrs={'property':'v:itemreviewed'}).get_text()
@@ -82,7 +81,7 @@ class updateItemListThread (threading.Thread):
                     itemDict = {}
                     itemDict['title'] = div.find('em').get_text().split('/')[0].strip()
                     itemDict['link'] = div.find('a')['href']
-                    reqDetail = urllib2.Request(itemDict['link'])
+                    reqDetail = urllib2.Request(itemDict['link'], headers=HEADERS)
                     textDetail = urllib2.urlopen(reqDetail).read()
                     soupDetail = BeautifulSoup(textDetail, 'html.parser')
                     itemDict['rating'] = soupDetail.find('strong', attrs={'class':'rating_num'}).get_text()
