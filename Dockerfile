@@ -5,7 +5,7 @@ RUN mkdir -p /usr/src/top15
 WORKDIR /usr/src/top15
 COPY . /usr/src/top15
 
-RUN pip3 install -r requirements.txt
+RUN pip3 install -r requirements/common.txt
 RUN crontab updateAll.cron
 
 EXPOSE 8000
