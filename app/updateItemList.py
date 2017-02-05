@@ -1,11 +1,10 @@
-# -*- coding: utf-8 -*-
 import urllib2
 import os
 import threading
 import json
 from bs4 import BeautifulSoup
 from qiniu_api import Qiniu
-from key import HEADERS
+from config import common
 
 class updateItemListThread (threading.Thread):
     def __init__(self, user_id, object_type, group_type, order_by, tag):
@@ -46,7 +45,7 @@ class updateItemListThread (threading.Thread):
 
     def run(self):
         try:
-            req = urllib2.Request(self.url, headers=HEADERS)
+            req = urllib2.Request(self.url, headers=common.HEADERS)
             text = urllib2.urlopen(req).read()
             soup = BeautifulSoup(text, 'html.parser')
         except:
@@ -60,7 +59,7 @@ class updateItemListThread (threading.Thread):
                 for book in books:
                     itemDict = {}
                     itemDict['link'] = book.find('h2').find('a')['href']
-                    reqDetail = urllib2.Request(itemDict['link'], headers=HEADERS)
+                    reqDetail = urllib2.Request(itemDict['link'], headers=common.HEADERS)
                     textDetail = urllib2.urlopen(reqDetail).read()
                     soupDetail = BeautifulSoup(textDetail, 'html.parser')
                     itemDict['title'] = soupDetail.find('span', attrs={'property':'v:itemreviewed'}).get_text()
@@ -81,7 +80,7 @@ class updateItemListThread (threading.Thread):
                     itemDict = {}
                     itemDict['title'] = div.find('em').get_text().split('/')[0].strip()
                     itemDict['link'] = div.find('a')['href']
-                    reqDetail = urllib2.Request(itemDict['link'], headers=HEADERS)
+                    reqDetail = urllib2.Request(itemDict['link'], headers=common.HEADERS)
                     textDetail = urllib2.urlopen(reqDetail).read()
                     soupDetail = BeautifulSoup(textDetail, 'html.parser')
                     itemDict['rating'] = soupDetail.find('strong', attrs={'class':'rating_num'}).get_text()

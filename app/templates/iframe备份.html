@@ -1,14 +1,14 @@
-<!-- Pawered by Jackeriss (http://www.jackeriss.com) -->
+<!-- Pawered by Jackeriss (https://www.jackeriss.com) -->
 <!DOCTYPE html>
 <html lang="zh-CN">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <title>Top 15</title>
-    <link href="//ocg2nnfbz.qnssl.com/css/bootstrap.min.css" rel="stylesheet">
-    <link href="//ocg2nnfbz.qnssl.com/css/iframe.css" rel="stylesheet">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="//ocg2nnfbz.qnssl.com/images/logo.png">
-    <link rel="shortcut icon" href="//ocg2nnfbz.qnssl.com/images/logo.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="static/css/iframe.css" rel="stylesheet">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="static/images/logo.png">
+    <link rel="shortcut icon" href="static/images/logo.png">
 
     {% if object_type == '2' %}
     <style>
@@ -20,6 +20,27 @@
     {% endif %}
   </head>
   <body>
+    <div class="spinner">
+      <div class="spinner-container container1">
+        <div class="circle1"></div>
+        <div class="circle2"></div>
+        <div class="circle3"></div>
+        <div class="circle4"></div>
+      </div>
+      <div class="spinner-container container2">
+        <div class="circle1"></div>
+        <div class="circle2"></div>
+        <div class="circle3"></div>
+        <div class="circle4"></div>
+      </div>
+      <div class="spinner-container container3">
+        <div class="circle1"></div>
+        <div class="circle2"></div>
+        <div class="circle3"></div>
+        <div class="circle4"></div>
+      </div>
+    </div>
+    <div class="waiting"></div>
     <div class="page page-items page-list">
       <ul>
         {% if items|length == 0 %}

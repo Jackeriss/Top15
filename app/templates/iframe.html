@@ -1,0 +1,55 @@
+<!-- Pawered by Jackeriss (https://www.jackeriss.com) -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Top 15</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="static/css/iframe.css" rel="stylesheet">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="static/images/logo.png">
+    <link rel="shortcut icon" href="static/images/logo.png">
+    <script src="static/js/jquery.min.js"></script>
+    <script src="static/js/iframe.js"></script>
+
+    <!-- /*<style>
+    .page-list-cover:before
+    {
+      padding-top: 100%;
+    }
+    </style>*/ -->
+
+  </head>
+  <body>
+    <input type="hidden" id="user_id" value="{{ escape(arguments['user_id']) }}"/>
+    <input type="hidden" id="object_type" value="{{ escape(arguments['object_type']) }}"/>
+    <input type="hidden" id="group_type" value="{{ escape(arguments['group_type']) }}"/>
+    <input type="hidden" id="order_by" value="{{ escape(arguments['order_by']) }}"/>
+    <input type="hidden" id="tag" value="{{ escape(arguments['tag']) }}"/>
+    {% raw xsrf_form_html() %}
+    <div class="spinner">
+      <div class="spinner-container container1">
+        <div class="circle1"></div>
+        <div class="circle2"></div>
+        <div class="circle3"></div>
+        <div class="circle4"></div>
+      </div>
+      <div class="spinner-container container2">
+        <div class="circle1"></div>
+        <div class="circle2"></div>
+        <div class="circle3"></div>
+        <div class="circle4"></div>
+      </div>
+      <div class="spinner-container container3">
+        <div class="circle1"></div>
+        <div class="circle2"></div>
+        <div class="circle3"></div>
+        <div class="circle4"></div>
+      </div>
+    </div>
+    <div class="waiting"></div>
+    <div class="noMatch">没有符合条件的项目</div>
+    <div class="page page-items page-list">
+    </div>
+  </body>
+</html>

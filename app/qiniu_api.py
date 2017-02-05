@@ -1,10 +1,15 @@
-# -*- coding: utf-8 -*-
 import os
 import uuid
 from qiniu import Auth, put_data, BucketManager
-from key import ACCESS_KEY, SECRET_KEY, BUCKET_NAME
+from config import COMMON_CONFIG
 
-q = Auth(ACCESS_KEY, SECRET_KEY)
+
+class COMMON_CONFIG:
+    ACCESS_KEY = 'xyB8wvoj4mZRHFrhFgkcuJUPMjjeyN2uoTmBNOMK'
+    SECRET_KEY = '1eDmF903TifW7BmuusF-DGWoVut3wqhxbdnIi2yB'
+    BUCKET_NAME = 'top15'
+
+q = Auth(COMMON_CONFIG.ACCESS_KEY, COMMON_CONFIG.SECRET_KEY)
 
 
 class Qiniu(object):
@@ -35,9 +40,9 @@ class Qiniu(object):
             if ret.get('key', None) == None:
                 raise Exception('fetch error')
             else:
-                return u'%s' % key
-        except Exception, e:
-            print str(e)
+                return '%s' % key
+        except Exception as e:
+            print (str(e))
             return str(e)
 
     def list_file_from_qiniu(self):
@@ -48,8 +53,8 @@ class Qiniu(object):
         marker = None
         try:
             bucket = BucketManager(q)
-            ret, eof, info = bucket.list(BUCKET_NAME, prefix, marker, limit, delimiter)
-        except Exception, e:
+            ret, eof, info = bucket.list(COMMON_CONFIG.BUCKET_NAME, prefix, marker, limit, delimiter)
+        except Exception as e:
             pass
         finally:
             return info
