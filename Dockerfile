@@ -6,7 +6,7 @@ WORKDIR /usr/src/top15
 COPY . /usr/src/top15
 
 RUN apt-get update
-RUN apt-get install cron
+RUN apt-get -y install cron
 RUN pip3 install -r requirements/common.txt
 RUN crontab /usr/src/top15/crontabfile
 RUN cp /usr/src/top15/crontabfile /etc/crontab
