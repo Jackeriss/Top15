@@ -6,7 +6,6 @@ WORKDIR /usr/src/top15
 COPY . /usr/src/top15
 
 RUN apt-get update
-RUN apt-get -y install rsyslogd
 RUN apt-get -y install cron
 RUN pip3 install -r requirements/common.txt
 RUN crontab /usr/src/top15/crontabfile
