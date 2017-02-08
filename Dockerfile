@@ -10,7 +10,6 @@ RUN apt-get -y install cron
 RUN pip3 install -r requirements/common.txt
 RUN crontab /usr/src/top15/crontabfile
 RUN cp /usr/src/top15/crontabfile /etc/crontab
-RUN touch /var/log/cron.log
 RUN chmod +x /usr/src/top15/run.sh
 
 WORKDIR /usr/src/top15
