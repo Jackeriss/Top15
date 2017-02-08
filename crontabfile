@@ -1,0 +1,1 @@
+0 0 * * * python /usr/src/top15/app/updateAll.py cron >> /var/log/cron.log 2>&1

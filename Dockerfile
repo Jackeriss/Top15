@@ -6,8 +6,13 @@ WORKDIR /usr/src/top15
 COPY . /usr/src/top15
 
 RUN pip3 install -r requirements/common.txt
-RUN crontab updateAll.cron
+RUN crontab /usr/src/top15/crontabfile
+RUN cp /usr/src/top15/crontabfile /etc/crontab
+RUN touch /var/log/cron.log
+RUN chmod +x /usr/src/top15/run.sh
+
+WORKDIR /usr/src/top15
 
 EXPOSE 8000
 
-CMD ["python","application.py"]
+CMD ["bash","/usr/src/top15/run.sh"]
