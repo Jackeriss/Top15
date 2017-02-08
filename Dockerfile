@@ -1,4 +1,4 @@
-FROM python:3.6.0
+FROM ubuntu:16.04
 MAINTAINER Jackeriss <i@jackeriss.com>
 
 RUN mkdir -p /usr/src/top15
