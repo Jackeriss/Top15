@@ -4,7 +4,7 @@
 使用 Top 15 在你的网站中展示最近看过/读过/听过的电影/书/音乐！
 
 ## Screenshots
-![1](https://raw.githubusercontent.com/Jackeriss/Top15/master/screenshots/1.jpg)
+![1](https://od4qh01lw.qnssl.com/project/Top15/1.jpg)
 
 ## Introduction
 1. 在 [https://top15.jackeriss.com](https://top15.jackeriss.com) 填写信息并生成展示页面
