@@ -9,6 +9,9 @@ $(function() {
   $('.one_line').on('change', function() {
     user_id = $('#user_id').val();
     tag = $('#tag').val();
+    if (tag == ''){
+      tag = 0;
+    }
     if (user_id != -1 && object_type != -1 && group_type != -1 && order_by != -1) {
       $('#submit_button').attr("disabled", false);
 		}
@@ -60,7 +63,7 @@ $(function() {
   }\n\
   window.setInterval("reinitIframe()", 200);\n\
 </script>\n\
-<iframe id="top15_iframe" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" width="100%" src="http://top15.jackeriss.com/iframe?user_id=' + user_id + '&object_type=' + object_type + '&group_type=' + group_type + '&order_by=' + order_by + '&tag=' + tag + '"></iframe>');
+<iframe id="top15_iframe" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" width="100%" src="https://top15.jackeriss.com/iframe?user_id=' + user_id + '&object_type=' + object_type + '&group_type=' + group_type + '&order_by=' + order_by + '&tag=' + tag + '"></iframe>');
     }
   });
   $('.jq_button').on('click', function() {
@@ -89,7 +92,7 @@ $(function() {
     });\n\
   });\n\
 </script>\n\
-<iframe id="top15_iframe" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" width="100%" src="http://top15.jackeriss.com/iframe?user_id=' + user_id + '&object_type=' + object_type + '&group_type=' + group_type + '&order_by=' + order_by + '&tag=' + tag + '"></iframe>');
+<iframe id="top15_iframe" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" width="100%" src="https://top15.jackeriss.com/iframe?user_id=' + user_id + '&object_type=' + object_type + '&group_type=' + group_type + '&order_by=' + order_by + '&tag=' + tag + '"></iframe>');
     }
   });
 });

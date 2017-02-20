@@ -37,12 +37,19 @@ class IframeHandler(web.RequestHandler):
     @gen.coroutine
     def get(self):
         arguments = {}
-        arguments['user_id'] = self.get_argument('user_id')
-        arguments['object_type'] = self.get_argument('object_type')
-        arguments['group_type'] = self.get_argument('group_type')
-        arguments['order_by'] = self.get_argument('order_by')
-        arguments['tag'] = self.get_argument('tag')
-        if arguments['tag'] == '':
+        try:
+            arguments['user_id'] = self.get_argument('user_id')
+            arguments['object_type'] = self.get_argument('object_type')
+            arguments['group_type'] = self.get_argument('group_type')
+            arguments['order_by'] = self.get_argument('order_by')
+        except:
+            arguments['user_id'] = '0'
+            arguments['object_type'] = '0'
+            arguments['group_type'] = '0'
+            arguments['order_by'] = '0'
+        try:
+            arguments['tag'] = self.get_argument('tag')
+        except:
             arguments['tag'] = '0'
         self.render('iframe.html', arguments=arguments)
 
@@ -51,12 +58,19 @@ class SpiderHandler(web.RequestHandler):
     @gen.coroutine
     def post(self):
         feedback = 'wait'
-        user_id = self.get_argument('user_id')
-        object_type = self.get_argument('object_type')
-        group_type = self.get_argument('group_type')
-        order_by = self.get_argument('order_by')
-        tag = self.get_argument('tag')
-        if tag == '':
+        try:
+            user_id = self.get_argument('user_id')
+            object_type = self.get_argument('object_type')
+            group_type = self.get_argument('group_type')
+            order_by = self.get_argument('order_by')
+        except:
+            user_id = '0'
+            object_type = '0'
+            group_type = '0'
+            order_by = '0'
+        try:
+            tag = self.get_argument('tag')
+        except:
             tag = '0'
         filePath = os.path.join(COMMON_CONFIG.DATA_DIR, user_id + ' ' +\
             object_type + ' ' + group_type + ' ' + order_by + ' ' + tag + '.json')
