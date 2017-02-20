@@ -5,7 +5,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 
 class COMMON_CONFIG:
-    PORT = 8000
+    PORT = 8082
     DEBUG = True
     DATA_DIR = os.path.join(basedir, 'data')
     COOKIE_SECRET = 'oqA/6vVxSu6IU+5UErK21/yv7XHASUwap+0z6WL3TJQ='

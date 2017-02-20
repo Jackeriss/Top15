@@ -14,6 +14,6 @@ RUN chmod +x /usr/src/top15/run.sh
 
 WORKDIR /usr/src/top15
 
-EXPOSE 8000
+EXPOSE 8082
 
 CMD ["bash","/usr/src/top15/run.sh"]
