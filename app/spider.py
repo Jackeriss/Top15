@@ -37,7 +37,9 @@ def grab(user_id, object_type, group_type, order_by, tag):
         object_type + ' ' + group_type + ' ' + order_by + ' ' + tag + '.json')
     client = httpclient.AsyncHTTPClient()
     try:
+        print(1)
         response = yield client.fetch(url, method='GET', headers=COMMON_CONFIG.HEADERS)
+        print(2)
     except:
         with open(filePath, 'w') as itemsFile:
             itemsFile.write('0')
@@ -97,7 +99,3 @@ def grab(user_id, object_type, group_type, order_by, tag):
                         Qiniu.fetch_file_to_qiniu(url=imageURL, filename=imageFileName, path='images')
         with open(filePath, 'w') as itemsFile:
             itemsFile.write(json.dumps(items))
-
-if __name__ == '__main__':
-    spider(user_id='Jackeriss', object_type='0',\
-        group_type='0', order_by='1', tag='0')
