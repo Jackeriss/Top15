@@ -1,6 +1,5 @@
 import os
 import json
-import redis
 from tornado import web, httpclient, gen, escape
 from config import COMMON_CONFIG
 from .spider import grab
@@ -8,13 +7,13 @@ from .spider import grab
 
 class PageNotFoundHandler(web.RequestHandler):
     def get(self):
-        self.render('index.html', code='404')
+        self.render('error.html', code='404')
 
     def write_error(self, status_code, **kwargs):
         if status_code == 404:
-            self.render('index.html', code='404')
+            self.render('error.html', code='404')
         else:
-            self.render('index.html', code='500')
+            self.render('error.html', code='500')
 
 
 class IndexHandler(web.RequestHandler):
@@ -91,3 +90,9 @@ class SpiderHandler(web.RequestHandler):
                 feedback = items
         respon_json = escape.json_encode(feedback)
         self.write(respon_json)
+
+    def write_error(self, status_code, **kwargs):
+        if status_code == 404:
+            self.render('error.html', code='404')
+        else:
+            self.render('error.html', code='500')

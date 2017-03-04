@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="使用 Top 15 在你的网站中展示最近看过/读过/听过的电影/书/音乐！">
+    <meta name="keywords" content="Jackeriss">
+    <title>Top 15</title>
+    <link href="static/css/site.css" rel="stylesheet"/>
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="static/images/logo.png">
+    <link rel="shortcut icon" href="static/images/logo.png">
+    <script src="static/js/jquery.min.js"></script>
+    <script src="static/js/index.js"></script>
+    <script src="static/js/baidu_tongji.js"></script>
+  </head>
+  <body>
+    {% if code == '404' %}
+    <div class="noMatch">404 - 无法找到页面</div>
+    {% else %}
+    <div class="noMatch">500 - 未知的错误发生了</div>
+    {% end %}
+  </body>
+</html>
