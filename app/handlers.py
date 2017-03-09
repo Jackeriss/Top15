@@ -19,10 +19,6 @@ class PageNotFoundHandler(web.RequestHandler):
 class IndexHandler(web.RequestHandler):
     @gen.coroutine
     def get(self):
-        try:
-            key = self.get_argument('key').strip()
-        except:
-            key = ''
         self.render('index.html')
 
     def write_error(self, status_code, **kwargs):
@@ -36,20 +32,11 @@ class IframeHandler(web.RequestHandler):
     @gen.coroutine
     def get(self):
         arguments = {}
-        try:
-            arguments['user_id'] = self.get_argument('user_id')
-            arguments['object_type'] = self.get_argument('object_type')
-            arguments['group_type'] = self.get_argument('group_type')
-            arguments['order_by'] = self.get_argument('order_by')
-        except:
-            arguments['user_id'] = '0'
-            arguments['object_type'] = '0'
-            arguments['group_type'] = '0'
-            arguments['order_by'] = '0'
-        try:
-            arguments['tag'] = self.get_argument('tag')
-        except:
-            arguments['tag'] = '0'
+        arguments['user_id'] = self.get_argument('user_id', default=0)
+        arguments['object_type'] = self.get_argument('object_type', default=0)
+        arguments['group_type'] = self.get_argument('group_type', default=0)
+        arguments['order_by'] = self.get_argument('order_by', default=0)
+        arguments['tag'] = self.get_argument('tag', default=0)
         self.render('iframe.html', arguments=arguments)
 
 
@@ -57,20 +44,11 @@ class SpiderHandler(web.RequestHandler):
     @gen.coroutine
     def post(self):
         feedback = 'wait'
-        try:
-            user_id = self.get_argument('user_id')
-            object_type = self.get_argument('object_type')
-            group_type = self.get_argument('group_type')
-            order_by = self.get_argument('order_by')
-        except:
-            user_id = '0'
-            object_type = '0'
-            group_type = '0'
-            order_by = '0'
-        try:
-            tag = self.get_argument('tag')
-        except:
-            tag = '0'
+        user_id = self.get_argument('user_id', default=0)
+        object_type = self.get_argument('object_type', default=0)
+        group_type = self.get_argument('group_type', default=0)
+        order_by = self.get_argument('order_by', default=0)
+        tag = self.get_argument('tag', default=0)
         filePath = os.path.join(COMMON_CONFIG.DATA_DIR, user_id + ' ' +\
             object_type + ' ' + group_type + ' ' + order_by + ' ' + tag + '.json')
         handling = COMMON_CONFIG.HANDLING.lrange('handling', 0, -1)
