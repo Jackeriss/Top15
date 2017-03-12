@@ -19,6 +19,7 @@ def create_app():
         (r'/', IndexHandler),
         (r'/iframe', IframeHandler),
         (r'/spider', SpiderHandler),
+        (r'/(robots\.txt)', web.StaticFileHandler, dict(path=settings['static_path'])),
         ('.*', PageNotFoundHandler)
      ], **settings)
     return app
