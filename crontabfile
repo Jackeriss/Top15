@@ -1,1 +1,1 @@
-0 0 0 1/1 * ? python3 /usr/src/top15/updateAll.py
+0 0 0,6,12,18 * * ? python3 /usr/src/top15/updateAll.py
