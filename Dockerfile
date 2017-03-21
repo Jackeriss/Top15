@@ -10,7 +10,7 @@ ADD crontabfile /etc/cron.d/top15-cron
 RUN chmod 0644 /etc/cron.d/top15-cron
 RUN touch /var/log/cron.log
 
-RUN apt-get -y update && apt-get -y install cron
+RUN apt-get update && apt-get -y install cron
 
 EXPOSE 8082
 
