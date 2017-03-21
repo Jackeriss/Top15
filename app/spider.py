@@ -94,6 +94,6 @@ def grab(user_id, object_type, group_type, order_by, tag):
                     else:
                         imageURL = 'https://img3.doubanio.com/view/photo/photo/public/' + imageFileName
                     if imageFileName not in existList:
-                        Qiniu.fetch_file_to_qiniu(url=imageURL, filename=imageFileName, path='images')
+                        Qiniu().fetch_file_to_qiniu(url=imageURL, filename=imageFileName, path='images')
         with open(filePath, 'w') as itemsFile:
             itemsFile.write(json.dumps(items))

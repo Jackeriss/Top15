@@ -15,7 +15,7 @@ class Qiniu(object):
         try:
             key = '%s/%s' % (path, filename)
             bucket = BucketManager(q)
-            ret, info = bucket.fetch(url, BUCKET_NAME, key)
+            ret, info = bucket.fetch(url, COMMON_CONFIG.BUCKET_NAME, key)
             if ret.get('key', None) == None:
                 raise Exception('fetch error')
             else:
