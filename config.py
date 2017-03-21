@@ -4,7 +4,6 @@ import redis
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 
-#为了方便起见直接使用配置文件而非系统变量，以下内容包含个人隐私，如需部署在你的服务器上，请务必将其替换。
 class COMMON_CONFIG:
     PORT = 8082
     DEBUG = True
