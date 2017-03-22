@@ -2,7 +2,6 @@ import os
 import json
 from bs4 import BeautifulSoup
 from tornado import httpclient, gen
-from .qiniu_api import Qiniu
 from config import COMMON_CONFIG
 
 @gen.coroutine
@@ -46,7 +45,6 @@ def grab(user_id, object_type, group_type, order_by, tag):
         soup = BeautifulSoup(text, 'lxml')
         resultList = soup.findAll('h3', attrs={'class':'t'})
         items = []
-        existList = str(Qiniu().list_file_from_qiniu())
         if object_type == '1':
             books = soup.findAll('li', attrs={'class':'subject-item'})
             for book in books:
@@ -61,16 +59,8 @@ def grab(user_id, object_type, group_type, order_by, tag):
                     detailSoup = BeautifulSoup(detailText, 'lxml')
                     itemDict['title'] = detailSoup.find('span', attrs={'property':'v:itemreviewed'}).get_text()
                     itemDict['rating'] = detailSoup.find('strong', attrs={'class':'rating_num'}).get_text()
-                    src = detailSoup.find('img', attrs={'rel':'v:photo'})['src']
-                    imageFileName = src.split('/')[-1]
-                    itemDict['image'] = 'https://ocg2nnfbz.qnssl.com/images/' + imageFileName
+                    itemDict['image'] = detailSoup.find('img', attrs={'rel':'v:photo'})['src']
                     items.append(itemDict)
-                    if 'mpic' in src:
-                        imageURL = 'https://img3.doubanio.com/lpic/' + imageFileName
-                    else:
-                        imageURL = 'https://img3.doubanio.com/view/photo/photo/public/' + imageFileName
-                    if imageFileName not in existList:
-                        Qiniu.fetch_file_to_qiniu(url=imageURL, filename=imageFileName, path='images')
         else:
             divs = soup.findAll('div', attrs={'class':'item'})
             for div in divs:
@@ -85,17 +75,10 @@ def grab(user_id, object_type, group_type, order_by, tag):
                     detailText = detailResponse.body
                     detailSoup = BeautifulSoup(detailText, 'lxml')
                     itemDict['rating'] = detailSoup.find('strong', attrs={'class':'rating_num'}).get_text()
-                    src = div.find('img')['src']
-                    imageFileName = src.split('/')[-1]
-                    itemDict['image'] = 'https://ocg2nnfbz.qnssl.com/images/' + imageFileName
-                    items.append(itemDict)
-                    if 'spic' in src:
-                        imageURL = 'https://img3.doubanio.com/lpic/' + imageFileName
-                    elif 'ipst' in src:
-                        imageURL = src.replace('ipst', 'lpst')
+                    if object_type == '0':
+                        itemDict['image'] = detailSoup.find('img', attrs={'rel':'v:image'})['src']
                     else:
-                        imageURL = 'https://img3.doubanio.com/view/photo/photo/public/' + imageFileName
-                    if imageFileName not in existList:
-                        Qiniu().fetch_file_to_qiniu(url=imageURL, filename=imageFileName, path='images')
+                        itemDict['image'] = detailSoup.find('img', attrs={'rel':'v:photo'})['src']
+                    items.append(itemDict)
         with open(filePath, 'w') as itemsFile:
             itemsFile.write(json.dumps(items))
