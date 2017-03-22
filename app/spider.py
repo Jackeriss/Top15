@@ -91,6 +91,8 @@ def grab(user_id, object_type, group_type, order_by, tag):
                     items.append(itemDict)
                     if 'spic' in src:
                         imageURL = 'https://img3.doubanio.com/lpic/' + imageFileName
+                    elif 'ipst' in src:
+                        imageURL = src.replace('ipst', 'lpst')
                     else:
                         imageURL = 'https://img3.doubanio.com/view/photo/photo/public/' + imageFileName
                     if imageFileName not in existList:
