@@ -1,17 +1,28 @@
+'''Config'''
 import os
+import copy
 import redis
 
-basedir = os.path.abspath(os.path.dirname(__file__))
+BASEDIR = os.path.abspath(os.path.dirname(__file__))
 
+COMMON_CONFIG = {
+    'PORT': 8082,
+    'DEBUG': True,
+    'DATA_DIR': os.path.join(BASEDIR, 'data'),
+    'COOKIE_SECRET': 'oqA/6vVxSu6IU+5UErK21/yv7XHASUwap+0z6WL3TJQ=',
+    'HEADERS': {'cookie': '''ll="118348"; bid=GHivBqEUNvk; ps=y; ct=y; vtd-d=
+                "1"; ap=1;ue="1075704670@qq.com"; dbcl2="63626550:qq6zQYSLKlw
+                "; ck=zCRQ; push_noty_num=0; push_doumail_num=0'''},
+    'REDIS_HOST': 'localhost',
+    'REDIS_PORT': 6379}
 
-class COMMON_CONFIG:
-    PORT = 8082
-    DEBUG = True
-    DATA_DIR = os.path.join(basedir, 'data')
-    COOKIE_SECRET = 'oqA/6vVxSu6IU+5UErK21/yv7XHASUwap+0z6WL3TJQ='
-    HEADERS = {'cookie': 'll="118348"; bid=GHivBqEUNvk; ps=y; ct=y; vtd-d="1"; ap=1;\
-     ue="1075704670@qq.com"; dbcl2="63626550:qq6zQYSLKlw"; ck=zCRQ; push_noty_num=0\
-     ; push_doumail_num=0'}
-    # HANDLING = redis.StrictRedis(host='localhost', port=6379, db=0)
-    HANDLING = redis.StrictRedis(host='redis', port=6379, db=0)
-    HANDLING.flushdb()
+DEV_CONFIG = copy.deepcopy(COMMON_CONFIG)
+
+PROD_CONFIG = copy.deepcopy(COMMON_CONFIG)
+PROD_CONFIG['DEBUG'] = False
+PROD_CONFIG['REDIS_HOST'] = 'redis'
+
+CONFIG = copy.deepcopy(PROD_CONFIG)
+
+CONFIG['HANDLING'] = redis.StrictRedis(host=CONFIG['REDIS_HOST'], port=CONFIG['REDIS_PORT'], db=0)
+CONFIG['HANDLING'].flushdb()

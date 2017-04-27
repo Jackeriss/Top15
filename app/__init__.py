@@ -1,25 +1,37 @@
+'''Initialize App'''
 import os
 from tornado import web
 from tornado.options import define, options
-from .handlers import *
-from config import COMMON_CONFIG
+from config import CONFIG
+from .handlers import (PageNotFoundHandler,
+                       IndexHandler,
+                       IframeHandler,
+                       SpiderHandler)
+
 
 def create_app():
+    '''Create APP'''
     options.parse_command_line()
-    define('port', default=COMMON_CONFIG.PORT, help='run on the given port', type=int)
+    define(
+        'port',
+        default=CONFIG['PORT'],
+        help='run on the given port',
+        type=int)
     settings = dict(
         template_path=os.path.join(os.path.dirname(__file__), 'templates'),
         static_path=os.path.join(os.path.dirname(__file__), 'static'),
-        debug=COMMON_CONFIG.DEBUG,
+        debug=CONFIG['DEBUG'],
         xsrf_cookies=True,
-        cookie_secret=COMMON_CONFIG.COOKIE_SECRET,
+        cookie_secret=CONFIG['COOKIE_SECRET'],
         gzip=True,
     )
     app = web.Application([
         (r'/', IndexHandler),
         (r'/iframe', IframeHandler),
         (r'/spider', SpiderHandler),
-        (r'/(robots\.txt)', web.StaticFileHandler, dict(path=settings['static_path'])),
+        (r'/(robots\.txt)',
+         web.StaticFileHandler,
+         dict(path=settings['static_path'])),
         ('.*', PageNotFoundHandler)
-     ], **settings)
+        ], **settings)
     return app

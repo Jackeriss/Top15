@@ -1,11 +1,14 @@
+'''ds'''
 import os
 import json
 from bs4 import BeautifulSoup
 from tornado import httpclient, gen
-from config import COMMON_CONFIG
+from config import CONFIG
+
 
 @gen.coroutine
 def grab(user_id, object_type, group_type, order_by, tag):
+    '''as'''
     object_type_name = '0'
     group_type_name = '0'
     order_by_name = '0'
@@ -32,53 +35,70 @@ def grab(user_id, object_type, group_type, order_by, tag):
     url = 'https://' + object_type_name + '.douban.com/people/' + \
         user_id + '/' + group_type_name + '?sort=' + order_by_name + \
         '&tag=' + tag_name
-    filePath = os.path.join(COMMON_CONFIG.DATA_DIR, user_id + ' ' +\
-        object_type + ' ' + group_type + ' ' + order_by + ' ' + tag + '.json')
+    file_path = os.path.join(
+        CONFIG['DATA_DIR'], user_id + ' ' + object_type + ' ' +
+        group_type + ' ' + order_by + ' ' + tag + '.json')
     client = httpclient.AsyncHTTPClient()
     try:
-        response = yield client.fetch(url, method='GET', headers=COMMON_CONFIG.HEADERS)
-    except:
-        with open(filePath, 'w') as itemsFile:
-            itemsFile.write('0')
+        response = yield client.fetch(url,
+                                      method='GET',
+                                      headers=CONFIG['HEADERS'])
+    except Exception as _e:
+        print(_e)
+        with open(file_path, 'w') as items_file:
+            items_file.write('0')
     else:
         text = response.body
         soup = BeautifulSoup(text, 'lxml')
-        resultList = soup.findAll('h3', attrs={'class':'t'})
         items = []
         if object_type == '1':
-            books = soup.findAll('li', attrs={'class':'subject-item'})
+            books = soup.findAll('li', attrs={'class': 'subject-item'})
             for book in books:
-                itemDict = {}
-                itemDict['link'] = book.find('h2').find('a')['href']
+                item_dict = {}
+                item_dict['link'] = book.find('h2').find('a')['href']
                 try:
-                    detailResponse = yield client.fetch(itemDict['link'], method='GET', headers=COMMON_CONFIG.HEADERS)
-                except:
-                    pass
+                    detail_response = yield client.fetch(
+                        item_dict['link'],
+                        method='GET',
+                        headers=CONFIG['HEADERS'])
+                except Exception as _e:
+                    print(_e)
                 else:
-                    detailText = detailResponse.body
-                    detailSoup = BeautifulSoup(detailText, 'lxml')
-                    itemDict['title'] = detailSoup.find('span', attrs={'property':'v:itemreviewed'}).get_text()
-                    itemDict['rating'] = detailSoup.find('strong', attrs={'class':'rating_num'}).get_text()
-                    itemDict['image'] = detailSoup.find('img', attrs={'rel':'v:photo'})['src']
-                    items.append(itemDict)
+                    detail_text = detail_response.body
+                    detail_soup = BeautifulSoup(detail_text, 'lxml')
+                    item_dict['title'] = detail_soup.find(
+                        'span',
+                        attrs={'property': 'v:itemreviewed'}).get_text()
+                    item_dict['rating'] = detail_soup.find(
+                        'strong', attrs={'class': 'rating_num'}).get_text()
+                    item_dict['image'] = detail_soup.find(
+                        'img', attrs={'rel': 'v:photo'})['src']
+                    items.append(item_dict)
         else:
-            divs = soup.findAll('div', attrs={'class':'item'})
+            divs = soup.findAll('div', attrs={'class': 'item'})
             for div in divs:
-                itemDict = {}
-                itemDict['title'] = div.find('em').get_text().split('/')[0].strip()
-                itemDict['link'] = div.find('a')['href']
+                item_dict = {}
+                item_dict['title'] = div.find('em').get_text().split('/')[0].\
+                    strip()
+                item_dict['link'] = div.find('a')['href']
                 try:
-                    detailResponse = yield client.fetch(itemDict['link'], method='GET', headers=COMMON_CONFIG.HEADERS)
-                except:
-                    pass
+                    detail_response = yield client.fetch(
+                        item_dict['link'],
+                        method='GET',
+                        headers=CONFIG['HEADERS'])
+                except Exception as _e:
+                    print(_e)
                 else:
-                    detailText = detailResponse.body
-                    detailSoup = BeautifulSoup(detailText, 'lxml')
-                    itemDict['rating'] = detailSoup.find('strong', attrs={'class':'rating_num'}).get_text()
+                    detail_text = detail_response.body
+                    detail_soup = BeautifulSoup(detail_text, 'lxml')
+                    item_dict['rating'] = detail_soup.find(
+                        'strong', attrs={'class': 'rating_num'}).get_text()
                     if object_type == '0':
-                        itemDict['image'] = detailSoup.find('img', attrs={'rel':'v:image'})['src']
+                        item_dict['image'] = detail_soup.find(
+                            'img', attrs={'rel': 'v:image'})['src']
                     else:
-                        itemDict['image'] = detailSoup.find('img', attrs={'rel':'v:photo'})['src']
-                    items.append(itemDict)
-        with open(filePath, 'w') as itemsFile:
-            itemsFile.write(json.dumps(items))
+                        item_dict['image'] = detail_soup.find(
+                            'img', attrs={'rel': 'v:photo'})['src']
+                    items.append(item_dict)
+        with open(file_path, 'w') as items_file:
+            items_file.write(json.dumps(items))

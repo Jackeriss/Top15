@@ -1,14 +1,14 @@
-$(function() {
-  function getCookie(name) {
-    var r = document.cookie.match("\\b" + name + "=([^;]*)\\b");
-    return r ? r[1] : undefined;
+$(function () {
+  function getCookie (name) {
+    var r = document.cookie.match('\\b' + name + '=([^;]*)\\b')
+    return r ? r[1] : undefined
   }
   var user_id = $('#user_id').val(),
     object_type = $('#object_type').val(),
     group_type = $('#group_type').val(),
     order_by = $('#order_by').val(),
     tag = $('#tag').val(),
-    _xsrf = getCookie('_xsrf');
+    _xsrf = getCookie('_xsrf')
   setTimeout(function() {
     $('.waiting').text('第一次生成需要一些时间，请耐心等待。');
   }, 10000);
@@ -48,27 +48,23 @@ $(function() {
             $('.spinner').hide();
             $('.waiting').hide();
             $('.page').show();
-            var resultStr = '<ul>';
-            for(var i=0; i<data.length; i++){
+            var resultStr = '<ul>',
+              starStr = ''
+            for (var i = 0; i < data.length; i++) {
               var rating = parseInt(parseFloat(data[i].rating) + 0.5),
-                coverStr = 'page-list-cover';
-              if(object_type == 2){
-                coverStr = 'page-list-cover music-cover';
-              }
-              if(rating >= 9){
-                starStr = '<span class="page-list-star page-list-star-full"></span><span class="page-list-star page-list-star-full"></span><span class="page-list-star page-list-star-full"></span><span class="page-list-star page-list-star-full"></span><span class="page-list-star page-list-star-full"></span>';
-              }
-              else if(rating >= 7){
-                starStr = '<span class="page-list-star page-list-star-full"></span><span class="page-list-star page-list-star-full"></span><span class="page-list-star page-list-star-full"></span><span class="page-list-star page-list-star-full"></span><span class="page-list-star page-list-star-gray"></span>';
-              }
-              else if(rating >= 5){
-                starStr = '<span class="page-list-star page-list-star-full"></span><span class="page-list-star page-list-star-full"></span><span class="page-list-star page-list-star-full"></span><span class="page-list-star page-list-star-gray"></span><span class="page-list-star page-list-star-gray"></span>';
-              }
-              else if(rating >= 3){
-                starStr = '<span class="page-list-star page-list-star-full"></span><span class="page-list-star page-list-star-full"></span><span class="page-list-star page-list-star-gray"></span><span class="page-list-star page-list-star-gray"></span><span class="page-list-star page-list-star-gray"></span>';
-              }
-              else{
-                starStr = '<span class="page-list-star page-list-star-gray"></span><span class="page-list-star page-list-star-gray"></span><span class="page-list-star page-list-star-gray"></span><span class="page-list-star page-list-star-gray"></span><span class="page-list-star page-list-star-gray"></span>';
+                coverStr = 'page-list-cover'
+              if (object_type === 2) {
+                coverStr = 'page-list-cover music-cover'
+              } if (rating >= 9) {
+                starStr = '<span class="page-list-star page-list-star-full"></span><span class="page-list-star page-list-star-full"></span><span class="page-list-star page-list-star-full"></span><span class="page-list-star page-list-star-full"></span><span class="page-list-star page-list-star-full"></span>'
+              } else if (rating >= 7) {
+                starStr = '<span class="page-list-star page-list-star-full"></span><span class="page-list-star page-list-star-full"></span><span class="page-list-star page-list-star-full"></span><span class="page-list-star page-list-star-full"></span><span class="page-list-star page-list-star-gray"></span>'
+              } else if (rating >= 5) {
+                starStr = '<span class="page-list-star page-list-star-full"></span><span class="page-list-star page-list-star-full"></span><span class="page-list-star page-list-star-full"></span><span class="page-list-star page-list-star-gray"></span><span class="page-list-star page-list-star-gray"></span>'
+              } else if (rating >= 3) {
+                starStr = '<span class="page-list-star page-list-star-full"></span><span class="page-list-star page-list-star-full"></span><span class="page-list-star page-list-star-gray"></span><span class="page-list-star page-list-star-gray"></span><span class="page-list-star page-list-star-gray"></span>'
+              } else {
+                starStr = '<span class="page-list-star page-list-star-gray"></span><span class="page-list-star page-list-star-gray"></span><span class="page-list-star page-list-star-gray"></span><span class="page-list-star page-list-star-gray"></span><span class="page-list-star page-list-star-gray"></span>'
               }
               resultStr += ('<li><a href="' + data[i].link + '"><div class="' + coverStr + '"><img src="' + data[i].image +
               '" class="display:block"></div></a><div class="page-list-info"><h3>' + data[i].title +

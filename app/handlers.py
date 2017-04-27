@@ -1,11 +1,13 @@
+'''da'''
 import os
 import json
-from tornado import web, httpclient, gen, escape
-from config import COMMON_CONFIG
+from tornado import web, gen, escape
+from config import CONFIG
 from .spider import grab
 
 
 class PageNotFoundHandler(web.RequestHandler):
+    '''ewqe'''
     def get(self):
         self.render('error.html', code='404')
 
@@ -17,6 +19,7 @@ class PageNotFoundHandler(web.RequestHandler):
 
 
 class IndexHandler(web.RequestHandler):
+    '''qwe'''
     @gen.coroutine
     def get(self):
         self.render('index.html')
@@ -29,6 +32,7 @@ class IndexHandler(web.RequestHandler):
 
 
 class IframeHandler(web.RequestHandler):
+    '''asd'''
     @gen.coroutine
     def get(self):
         arguments = {}
@@ -41,6 +45,7 @@ class IframeHandler(web.RequestHandler):
 
 
 class SpiderHandler(web.RequestHandler):
+    '''qweqwe'''
     @gen.coroutine
     def post(self):
         feedback = 'wait'
@@ -49,19 +54,21 @@ class SpiderHandler(web.RequestHandler):
         group_type = self.get_argument('group_type', default=0)
         order_by = self.get_argument('order_by', default=0)
         tag = self.get_argument('tag', default=0)
-        filePath = os.path.join(COMMON_CONFIG.DATA_DIR, user_id + ' ' +\
-            object_type + ' ' + group_type + ' ' + order_by + ' ' + tag + '.json')
-        handling = COMMON_CONFIG.HANDLING.lrange('handling', 0, -1)
-        if not os.path.exists(filePath):
-            if filePath.encode('utf-8') not in handling:
-                grab(user_id=user_id, object_type=object_type,\
-                    group_type=group_type, order_by=order_by, tag=tag)
-                COMMON_CONFIG.HANDLING.rpush('handling', filePath)
+        file_path = os.path.join(
+            CONFIG['DATA_DIR'],
+            user_id + ' ' + object_type + ' ' + group_type + ' ' + order_by +
+            ' ' + tag + '.json')
+        handling = CONFIG['HANDLING'].lrange('handling', 0, -1)
+        if not os.path.exists(file_path):
+            if file_path.encode('utf-8') not in handling:
+                grab(user_id=user_id, object_type=object_type,
+                     group_type=group_type, order_by=order_by, tag=tag)
+                CONFIG['HANDLING'].rpush('handling', file_path)
         else:
-            if filePath.encode('utf-8') in handling:
-                COMMON_CONFIG.HANDLING.lrem('handling', 1, filePath)
-            with open(filePath, 'r') as itemsFile:
-                items = json.loads(itemsFile.read())
+            if file_path.encode('utf-8') in handling:
+                CONFIG['HANDLING'].lrem('handling', 1, file_path)
+            with open(file_path, 'r') as items_file:
+                items = json.loads(items_file.read())
             if items == 0:
                 feedback = '404'
             else:
