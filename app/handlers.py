@@ -1,5 +1,6 @@
 import os
 import json
+from datetime import datetime
 from tornado import web, gen, escape
 from tornado.options import options
 from .spider import grab
@@ -64,6 +65,9 @@ class SpiderHandler(web.RequestHandler):
                 options.CONFIG['HANDLING'].lrem('handling', 1, file_path)
             with open(file_path, 'r') as items_file:
                 items = json.loads(items_file.read())
+            if datetime.now().strftime('%Y-%m-%d') != items[0]:
+                grab(user_id=user_id, object_type=object_type,
+                     group_type=group_type, order_by=order_by, tag=tag)
             if items == 0:
                 feedback = '404'
             else:

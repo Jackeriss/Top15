@@ -1,5 +1,7 @@
 import os
 import json
+import time
+from datetime import datetime
 from bs4 import BeautifulSoup
 from tornado import httpclient, gen
 from tornado.options import options
@@ -41,14 +43,17 @@ def grab(user_id, object_type, group_type, order_by, tag):
         response = yield client.fetch(url,
                                       method='GET',
                                       headers=options.CONFIG['HEADERS'])
+        print(1)
     except Exception as _e:
+        print(2)
         print(_e)
         with open(file_path, 'w') as items_file:
             items_file.write('0')
     else:
+        print(3)
         text = response.body
         soup = BeautifulSoup(text, 'lxml')
-        items = []
+        items = [datetime.now().strftime('%Y-%m-%d')]
         if object_type == '1':
             books = soup.findAll('li', attrs={'class': 'subject-item'})
             for book in books:
