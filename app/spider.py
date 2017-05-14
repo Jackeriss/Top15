@@ -39,6 +39,7 @@ def grab(user_id, object_type, group_type, order_by, tag):
         options.CONFIG['DATA_DIR'], user_id + ' ' + object_type + ' ' +
         group_type + ' ' + order_by + ' ' + tag + '.json')
     client = httpclient.AsyncHTTPClient()
+    items = [datetime.now().strftime('%Y-%m-%d')]
     try:
         response = yield client.fetch(url,
                                       method='GET',
@@ -46,11 +47,10 @@ def grab(user_id, object_type, group_type, order_by, tag):
     except Exception as _e:
         print(_e)
         with open(file_path, 'w') as items_file:
-            items_file.write('0')
+            items_file.write(json.dumps(items))
     else:
         text = response.body
         soup = BeautifulSoup(text, 'lxml')
-        items = [datetime.now().strftime('%Y-%m-%d')]
         if object_type == '1':
             books = soup.findAll('li', attrs={'class': 'subject-item'})
             for book in books:

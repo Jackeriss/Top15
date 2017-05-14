@@ -40,6 +40,11 @@ class IframeHandler(web.RequestHandler):
         arguments['tag'] = self.get_argument('tag', default=0)
         self.render('iframe.html', arguments=arguments)
 
+    def write_error(self, status_code, **kwargs):
+        if status_code == 404:
+            self.render('error.html', code='404')
+        else:
+            self.render('error.html', code='500')
 
 class SpiderHandler(web.RequestHandler):
     @gen.coroutine
@@ -68,7 +73,7 @@ class SpiderHandler(web.RequestHandler):
             if datetime.now().strftime('%Y-%m-%d') != items[0]:
                 grab(user_id=user_id, object_type=object_type,
                      group_type=group_type, order_by=order_by, tag=tag)
-            if items == 0:
+            if len(items) <= 1:
                 feedback = '404'
             else:
                 feedback = items
