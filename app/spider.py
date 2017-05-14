@@ -1,14 +1,12 @@
-'''ds'''
 import os
 import json
 from bs4 import BeautifulSoup
 from tornado import httpclient, gen
-from config import CONFIG
+from tornado.options import options
 
 
 @gen.coroutine
 def grab(user_id, object_type, group_type, order_by, tag):
-    '''as'''
     object_type_name = '0'
     group_type_name = '0'
     order_by_name = '0'
@@ -36,13 +34,13 @@ def grab(user_id, object_type, group_type, order_by, tag):
         user_id + '/' + group_type_name + '?sort=' + order_by_name + \
         '&tag=' + tag_name
     file_path = os.path.join(
-        CONFIG['DATA_DIR'], user_id + ' ' + object_type + ' ' +
+        options.CONFIG['DATA_DIR'], user_id + ' ' + object_type + ' ' +
         group_type + ' ' + order_by + ' ' + tag + '.json')
     client = httpclient.AsyncHTTPClient()
     try:
         response = yield client.fetch(url,
                                       method='GET',
-                                      headers=CONFIG['HEADERS'])
+                                      headers=options.CONFIG['HEADERS'])
     except Exception as _e:
         print(_e)
         with open(file_path, 'w') as items_file:
@@ -60,7 +58,7 @@ def grab(user_id, object_type, group_type, order_by, tag):
                     detail_response = yield client.fetch(
                         item_dict['link'],
                         method='GET',
-                        headers=CONFIG['HEADERS'])
+                        headers=options.CONFIG['HEADERS'])
                 except Exception as _e:
                     print(_e)
                 else:
@@ -85,7 +83,7 @@ def grab(user_id, object_type, group_type, order_by, tag):
                     detail_response = yield client.fetch(
                         item_dict['link'],
                         method='GET',
-                        headers=CONFIG['HEADERS'])
+                        headers=options.CONFIG['HEADERS'])
                 except Exception as _e:
                     print(_e)
                 else:

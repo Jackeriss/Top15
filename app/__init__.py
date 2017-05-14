@@ -1,8 +1,9 @@
 '''Initialize App'''
 import os
+import redis
 from tornado import web
 from tornado.options import define, options
-from config import CONFIG
+from config import DEV_CONFIG, PROD_CONFIG
 from .handlers import (PageNotFoundHandler,
                        IndexHandler,
                        IframeHandler,
@@ -11,18 +12,34 @@ from .handlers import (PageNotFoundHandler,
 
 def create_app():
     '''Create APP'''
-    options.parse_command_line()
     define(
-        'port',
-        default=CONFIG['PORT'],
-        help='run on the given port',
-        type=int)
+        'config',
+        default='dev',
+        help='config',
+        type=str)
+    options.parse_command_line()
+    if options.config == 'dev':
+        DEV_CONFIG['HANDLING'] = redis.StrictRedis(host=DEV_CONFIG['REDIS_HOST'], port=DEV_CONFIG['REDIS_PORT'], db=0)
+        DEV_CONFIG['HANDLING'].flushdb()
+        define(
+            'CONFIG',
+            default=DEV_CONFIG,
+            help='config',
+            type=dict)
+    else:
+        PROD_CONFIG['HANDLING'] = redis.StrictRedis(host=PROD_CONFIG['REDIS_HOST'], port=PROD_CONFIG['REDIS_PORT'], db=0)
+        PROD_CONFIG['HANDLING'].flushdb()
+        define(
+            'CONFIG',
+            default=PROD_CONFIG,
+            help='config',
+            type=dict)
     settings = dict(
         template_path=os.path.join(os.path.dirname(__file__), 'templates'),
         static_path=os.path.join(os.path.dirname(__file__), 'static'),
-        debug=CONFIG['DEBUG'],
+        debug=options.CONFIG['DEBUG'],
         xsrf_cookies=True,
-        cookie_secret=CONFIG['COOKIE_SECRET'],
+        cookie_secret=options.CONFIG['COOKIE_SECRET'],
         gzip=True,
     )
     app = web.Application([
