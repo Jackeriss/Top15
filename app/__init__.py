@@ -19,7 +19,8 @@ def create_app():
         type=str)
     options.parse_command_line()
     if options.config == 'dev':
-        DEV_CONFIG['HANDLING'] = redis.StrictRedis(host=DEV_CONFIG['REDIS_HOST'], port=DEV_CONFIG['REDIS_PORT'], db=0)
+        DEV_CONFIG['HANDLING'] = redis.StrictRedis(host=DEV_CONFIG['REDIS_HOST'],
+                                                   port=DEV_CONFIG['REDIS_PORT'], db=0)
         DEV_CONFIG['HANDLING'].flushdb()
         define(
             'CONFIG',
@@ -27,7 +28,8 @@ def create_app():
             help='config',
             type=dict)
     else:
-        PROD_CONFIG['HANDLING'] = redis.StrictRedis(host=PROD_CONFIG['REDIS_HOST'], port=PROD_CONFIG['REDIS_PORT'], db=0)
+        PROD_CONFIG['HANDLING'] = redis.StrictRedis(host=PROD_CONFIG['REDIS_HOST'],
+                                                    port=PROD_CONFIG['REDIS_PORT'], db=0)
         PROD_CONFIG['HANDLING'].flushdb()
         define(
             'CONFIG',

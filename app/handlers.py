@@ -7,6 +7,7 @@ from .spider import grab
 
 
 class PageNotFoundHandler(web.RequestHandler):
+    @gen.coroutine
     def get(self):
         self.render('error.html', code='404')
 
