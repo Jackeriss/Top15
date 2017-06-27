@@ -15,7 +15,7 @@ def create_app():
     define(
         'config',
         default='dev',
-        help='config',
+        help='[dev|prod](dev is defualt)',
         type=str)
     options.parse_command_line()
     if options.config == 'dev':
@@ -25,7 +25,6 @@ def create_app():
         define(
             'CONFIG',
             default=DEV_CONFIG,
-            help='config',
             type=dict)
     else:
         PROD_CONFIG['HANDLING'] = redis.StrictRedis(host=PROD_CONFIG['REDIS_HOST'],
@@ -34,7 +33,6 @@ def create_app():
         define(
             'CONFIG',
             default=PROD_CONFIG,
-            help='config',
             type=dict)
     settings = dict(
         template_path=os.path.join(os.path.dirname(__file__), 'templates'),
