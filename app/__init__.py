@@ -15,8 +15,6 @@ from .handlers import (PageNotFoundHandler,
 
 def create_app():
     '''Create APP'''
-    print(sys.getdefaultencoding())
-    print(sys.stdout.encoding)
     root_logger = logging.getLogger()
     formatter = logging.Formatter('[%(asctime)s] $%(levelname)s (%(filename)s:%(lineno)d) %(message)s')
     stdout_hdlr = logging.StreamHandler(sys.stdout)
