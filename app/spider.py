@@ -1,11 +1,11 @@
 import os
+import ssl
 import json
-import time
 from datetime import datetime
+
 from bs4 import BeautifulSoup
 from tornado import httpclient, gen
 from tornado.options import options
-
 
 @gen.coroutine
 def grab(user_id, object_type, group_type, order_by, tag):
@@ -36,16 +36,16 @@ def grab(user_id, object_type, group_type, order_by, tag):
         user_id + '/' + group_type_name + '?sort=' + order_by_name + \
         '&tag=' + tag_name
     file_path = os.path.join(
-        options.CONFIG['DATA_DIR'], user_id + ' ' + object_type + ' ' +
-        group_type + ' ' + order_by + ' ' + tag + '.json')
+        options.config['root_path'], 'data',
+        ' '.join((user_id, object_type, group_type, order_by, tag)) + '.json')
     client = httpclient.AsyncHTTPClient()
     items = [datetime.now().strftime('%Y-%m-%d')]
     try:
         response = yield client.fetch(url,
                                       method='GET',
-                                      headers=options.CONFIG['HEADERS'])
-    except Exception as _e:
-        print(_e)
+                                      headers=options.config['headers'])
+    except Exception as err:
+        options.config['root_logger'].error(err, exc_info=True)
         with open(file_path, 'w') as items_file:
             items_file.write(json.dumps(items))
     else:
@@ -60,9 +60,9 @@ def grab(user_id, object_type, group_type, order_by, tag):
                     detail_response = yield client.fetch(
                         item_dict['link'],
                         method='GET',
-                        headers=options.CONFIG['HEADERS'])
-                except Exception as _e:
-                    print(_e)
+                        headers=options.config['headers'])
+                except Exception as err:
+                    options.config['root_logger'].error(err, exc_info=True)
                 else:
                     detail_text = detail_response.body
                     detail_soup = BeautifulSoup(detail_text, 'lxml')
@@ -85,9 +85,9 @@ def grab(user_id, object_type, group_type, order_by, tag):
                     detail_response = yield client.fetch(
                         item_dict['link'],
                         method='GET',
-                        headers=options.CONFIG['HEADERS'])
-                except Exception as _e:
-                    print(_e)
+                        headers=options.config['headers'])
+                except Exception as err:
+                    options.config['root_logger'].error(err, exc_info=True)
                 else:
                     detail_text = detail_response.body
                     detail_soup = BeautifulSoup(detail_text, 'lxml')

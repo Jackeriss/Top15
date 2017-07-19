@@ -1,8 +1,10 @@
 import os
 import json
 from datetime import datetime
+
 from tornado import web, gen, escape
 from tornado.options import options
+
 from .spider import grab
 
 
@@ -56,24 +58,22 @@ class SpiderHandler(web.RequestHandler):
         group_type = self.get_argument('group_type', default=0)
         order_by = self.get_argument('order_by', default=0)
         tag = self.get_argument('tag', default=0)
-        file_path = os.path.join(
-            options.CONFIG['DATA_DIR'],
-            user_id + ' ' + object_type + ' ' + group_type + ' ' + order_by +
-            ' ' + tag + '.json')
-        handling = options.CONFIG['HANDLING'].lrange('handling', 0, -1)
+        key = ' '.join((user_id, object_type, group_type, order_by, tag))
+        file_path = os.path.join(options.config['root_path'], 'data', key + '.json')
+        handling = options.handling
         if not os.path.exists(file_path):
-            if file_path.encode('utf-8') not in handling:
-                grab(user_id=user_id, object_type=object_type,
-                     group_type=group_type, order_by=order_by, tag=tag)
-                options.CONFIG['HANDLING'].rpush('handling', file_path)
+            if key not in handling:
+                yield grab(user_id=user_id, object_type=object_type,
+                           group_type=group_type, order_by=order_by, tag=tag)
+                options.handling.append(key)
         else:
-            if file_path.encode('utf-8') in handling:
-                options.CONFIG['HANDLING'].lrem('handling', 1, file_path)
+            if key in handling:
+                options.handling.remove(key)
             with open(file_path, 'r') as items_file:
                 items = json.loads(items_file.read())
             if datetime.now().strftime('%Y-%m-%d') != items[0]:
-                grab(user_id=user_id, object_type=object_type,
-                     group_type=group_type, order_by=order_by, tag=tag)
+                yield grab(user_id=user_id, object_type=object_type,
+                           group_type=group_type, order_by=order_by, tag=tag)
             if len(items) <= 1:
                 feedback = '404'
             else:
