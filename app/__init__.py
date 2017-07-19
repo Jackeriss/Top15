@@ -15,6 +15,8 @@ from .handlers import (PageNotFoundHandler,
 
 def create_app():
     '''Create APP'''
+    reload(sys)
+    sys.setdefaultencoding('utf8')
     root_logger = logging.getLogger()
     formatter = logging.Formatter('[%(asctime)s] $%(levelname)s (%(filename)s:%(lineno)d) %(message)s')
     stdout_hdlr = logging.StreamHandler(sys.stdout)
@@ -44,8 +46,8 @@ def create_app():
     else:
         define('config', default=PROD_CONFIG, type=dict)
 
-    info_logger_path = os.path.join(options.config['root_path'], 'logs/info.log')
-    err_logger_path = os.path.join(options.config['root_path'], 'logs/err.log')
+    info_logger_path = os.path.join(options.config['root_path'], 'log/info.log')
+    err_logger_path = os.path.join(options.config['root_path'], 'log/err.log')
     file_info_hdlr = logging.FileHandler(info_logger_path)
     file_err_hdlr = logging.FileHandler(err_logger_path)
     file_info_hdlr.addFilter(log_filter)
