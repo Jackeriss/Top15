@@ -43,7 +43,8 @@ def grab(user_id, object_type, group_type, order_by, tag):
     try:
         response = yield client.fetch(url,
                                       method='GET',
-                                      headers=options.config['headers'])
+                                      headers=options.config['headers'],
+                                      ssl_options=ssl._create_unverified_context())
     except Exception as err:
         options.config['root_logger'].error(err, exc_info=True)
         with open(file_path, 'w') as items_file:
@@ -53,17 +54,20 @@ def grab(user_id, object_type, group_type, order_by, tag):
         soup = BeautifulSoup(text, 'lxml')
         if object_type == '1':
             books = soup.findAll('li', attrs={'class': 'subject-item'})
-            for book in books:
-                item_dict = {}
-                item_dict['link'] = book.find('h2').find('a')['href']
-                try:
-                    detail_response = yield client.fetch(
-                        item_dict['link'],
-                        method='GET',
-                        headers=options.config['headers'])
-                except Exception as err:
-                    options.config['root_logger'].error(err, exc_info=True)
-                else:
+            links = [book.find('h2').find('a')['href'] for book in books]
+            try:
+                detail_responses = yield [safty_fetch(client.fetch(
+                    link,
+                    method='GET',
+                    headers=options.config['headers'],
+                    ssl_options=ssl._create_unverified_context()))
+                                          for link in links]
+            except Exception as err:
+                options.config['root_logger'].error(err, exc_info=True)
+            else:
+                for i, detail_response in enumerate(detail_responses):
+                    item_dict = {}
+                    item_dict['link'] = links[i]
                     detail_text = detail_response.body
                     detail_soup = BeautifulSoup(detail_text, 'lxml')
                     item_dict['title'] = detail_soup.find(
@@ -76,19 +80,23 @@ def grab(user_id, object_type, group_type, order_by, tag):
                     items.append(item_dict)
         else:
             divs = soup.findAll('div', attrs={'class': 'item'})
-            for div in divs:
-                item_dict = {}
-                item_dict['title'] = div.find('em').get_text().split('/')[0].\
-                    strip()
-                item_dict['link'] = div.find('a')['href']
-                try:
-                    detail_response = yield client.fetch(
-                        item_dict['link'],
-                        method='GET',
-                        headers=options.config['headers'])
-                except Exception as err:
-                    options.config['root_logger'].error(err, exc_info=True)
-                else:
+            links = [div.find('a')['href'] for div in divs]
+            titles = [div.find('em').get_text().split('/')[0].strip()
+                      for div in divs]
+            try:
+                detail_responses = yield [safty_fetch(client.fetch(
+                    link,
+                    method='GET',
+                    headers=options.config['headers'],
+                    ssl_options=ssl._create_unverified_context()))
+                                          for link in links]
+            except Exception as err:
+                options.config['root_logger'].error(err, exc_info=True)
+            else:
+                for i, detail_response in enumerate(detail_responses):
+                    item_dict = {}
+                    item_dict['link'] = links[i]
+                    item_dict['title'] = titles[i]
                     detail_text = detail_response.body
                     detail_soup = BeautifulSoup(detail_text, 'lxml')
                     item_dict['rating'] = detail_soup.find(
@@ -102,3 +110,12 @@ def grab(user_id, object_type, group_type, order_by, tag):
                     items.append(item_dict)
         with open(file_path, 'w') as items_file:
             items_file.write(json.dumps(items))
+
+@gen.coroutine
+def safty_fetch(fetch_routine):
+    try:
+        response = yield fetch_routine
+    except Exception as err:
+        raise gen.Return(err)
+    else:
+        raise gen.Return(response)

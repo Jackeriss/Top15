@@ -9,7 +9,6 @@ from .spider import grab
 
 
 class PageNotFoundHandler(web.RequestHandler):
-    @gen.coroutine
     def get(self):
         self.render('error.html', code='404')
 
@@ -21,7 +20,6 @@ class PageNotFoundHandler(web.RequestHandler):
 
 
 class IndexHandler(web.RequestHandler):
-    @gen.coroutine
     def get(self):
         self.render('index.html')
 
@@ -33,7 +31,6 @@ class IndexHandler(web.RequestHandler):
 
 
 class IframeHandler(web.RequestHandler):
-    @gen.coroutine
     def get(self):
         arguments = {}
         arguments['user_id'] = self.get_argument('user_id', default=0)
@@ -48,6 +45,7 @@ class IframeHandler(web.RequestHandler):
             self.render('error.html', code='404')
         else:
             self.render('error.html', code='500')
+
 
 class SpiderHandler(web.RequestHandler):
     @gen.coroutine
