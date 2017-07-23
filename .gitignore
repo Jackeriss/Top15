@@ -1,6 +1,6 @@
 __pycache__/
 *.pyc
 *.log
+*.json
 .DS_Store
-.json
 venv/
