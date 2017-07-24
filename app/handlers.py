@@ -33,11 +33,11 @@ class IndexHandler(web.RequestHandler):
 class IframeHandler(web.RequestHandler):
     def get(self):
         arguments = {}
-        arguments['user_id'] = self.get_argument('user_id', default=0)
-        arguments['object_type'] = self.get_argument('object_type', default=0)
-        arguments['group_type'] = self.get_argument('group_type', default=0)
-        arguments['order_by'] = self.get_argument('order_by', default=0)
-        arguments['tag'] = self.get_argument('tag', default=0)
+        arguments['user_id'] = self.get_argument('user_id', 0)
+        arguments['object_type'] = self.get_argument('object_type', 0)
+        arguments['group_type'] = self.get_argument('group_type', 0)
+        arguments['order_by'] = self.get_argument('order_by', 0)
+        arguments['tag'] = self.get_argument('tag', 0)
         self.render('iframe.html', arguments=arguments)
 
     def write_error(self, status_code, **kwargs):
@@ -51,11 +51,11 @@ class SpiderHandler(web.RequestHandler):
     @gen.coroutine
     def post(self):
         feedback = 'wait'
-        user_id = self.get_argument('user_id', default=0)
-        object_type = self.get_argument('object_type', default=0)
-        group_type = self.get_argument('group_type', default=0)
-        order_by = self.get_argument('order_by', default=0)
-        tag = self.get_argument('tag', default=0)
+        user_id = self.get_argument('user_id', 0)
+        object_type = self.get_argument('object_type', 0)
+        group_type = self.get_argument('group_type', 0)
+        order_by = self.get_argument('order_by', 0)
+        tag = self.get_argument('tag', 0)
         key = ' '.join((user_id, object_type, group_type, order_by, tag))
         file_path = os.path.join(options.config['root_path'], 'data', key + '.json')
         handling = options.handling
