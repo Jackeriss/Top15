@@ -8,7 +8,8 @@ $(function() {
     group_type = $('#group_type').val(),
     order_by = $('#order_by').val(),
     tag = $('#tag').val(),
-    _xsrf = getCookie('_xsrf')
+    _xsrf = getCookie('_xsrf');
+  console.log(_xsrf);
   setTimeout(function() {
     $('.waiting').text('第一次生成需要一些时间，请耐心等待。');
   }, 10000);
