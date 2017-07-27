@@ -1,15 +1,9 @@
 $(function() {
-  function getCookie(name) {
-    var r = document.cookie.match('\\b' + name + '=([^;]*)\\b')
-    return r ? r[1] : undefined
-  }
   var user_id = $('#user_id').val(),
     object_type = $('#object_type').val(),
     group_type = $('#group_type').val(),
     order_by = $('#order_by').val(),
-    tag = $('#tag').val(),
-    _xsrf = getCookie('_xsrf');
-  console.log(_xsrf);
+    tag = $('#tag').val();
   setTimeout(function() {
     $('.waiting').text('第一次生成需要一些时间，请耐心等待。');
   }, 10000);
@@ -20,7 +14,6 @@ $(function() {
       type: 'post',
       url: '/spider',
       data: {
-        _xsrf: _xsrf,
         user_id: user_id,
         object_type: object_type,
         group_type: group_type,
