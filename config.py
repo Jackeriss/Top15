@@ -7,7 +7,6 @@ ROOT_PATH = os.path.realpath(os.path.dirname(__file__))
 COMMON_CONFIG = {
     'port': 8082,
     'debug': True,
-    'cookie_secret': 'oqA/6vVxSu6IU+5UErK21/yv7XHASUwap+0z6WL3TJQ=',
     'root_path': ROOT_PATH,
     'headers': {'cookie': ('ll="118348"; bid=u7DQ-3A5QCo; ps=y; ue="1075704670'
                            '@qq.com"; dbcl2="63626550:zAz6Nxzch4M"; ck=B1MZ; c'

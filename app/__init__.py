@@ -66,8 +66,6 @@ def create_app():
         template_path=os.path.join(os.path.dirname(__file__), 'templates'),
         static_path=os.path.join(os.path.dirname(__file__), 'static'),
         debug=options.config['debug'],
-        xsrf_cookies=True,
-        cookie_secret=options.config['cookie_secret'],
         gzip=True,
     )
     app = web.Application([
