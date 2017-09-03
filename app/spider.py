@@ -41,10 +41,10 @@ def grab(user_id, object_type, group_type, order_by, tag):
     client = httpclient.AsyncHTTPClient()
     items = [datetime.now().strftime('%Y-%m-%d')]
     try:
-        response = yield client.fetch(url,
+        response = yield safty_fetch(client.fetch(url,
                                       method='GET',
                                       headers=options.config['headers'],
-                                      ssl_options=ssl._create_unverified_context())
+                                      ssl_options=ssl._create_unverified_context()))
     except Exception as err:
         options.config['root_logger'].error(err, exc_info=True)
         with open(file_path, 'w') as items_file:
