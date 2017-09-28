@@ -23,30 +23,38 @@ $(function() {
       dataType: 'json',
       success: function(data) {
         if (data == '404') {
-          $('.page').hide();
-          $('.spinner').hide();
-          $('.waiting').hide();
-          $('.noMatch').show();
+          $('.page').addClass('dn');
+          $('.spinner').addClass('dn');
+          $('.waiting').addClass('dn');
+          $('.noMatch').fadeIn(800, function() {
+            $('.noMatch').removeClass('dn');
+          });
         } else {
           if (data == 'wait') {
-            $('.page').hide();
-            $('.noMatch').hide();
-            $('.spinner').show();
-            $('.waiting').show();
+            $('.page').addClass('dn');
+            $('.noMatch').addClass('dn');
+            $('.spinner').fadeIn(800, function() {
+              $('.spinner').removeClass('dn');
+            });
+            $('.waiting').fadeIn(800, function() {
+              $('.waiting').removeClass('dn');
+            });
             setTimeout(function() {
               Loop_ajax();
             }, 1000);
           } else {
-            $('.noMatch').hide();
-            $('.spinner').hide();
-            $('.waiting').hide();
-            $('.page').show();
+            $('.noMatch').addClass('dn');
+            $('.spinner').addClass('dn');
+            $('.waiting').addClass('dn');
+            $('.page').fadeIn(800, function() {
+              $('.page').removeClass('dn');
+            });
             var resultStr = '<ul>',
               starStr = ''
             for (var i = 1; i < data.length; i++) {
               var rating = parseInt(parseFloat(data[i].rating) + 0.5),
                 coverStr = 'page-list-cover'
-              if (object_type === 2) {
+              if (object_type == 2) {
                 coverStr = 'page-list-cover music-cover'
               }
               if (rating >= 9) {

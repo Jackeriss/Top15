@@ -1,5 +1,8 @@
-.noMatch {
+.dn {
   display: none;
+}
+
+.noMatch {
   color: #2E963D;
   font-size: 16px;
   text-shadow: 1px 1px 1px #ddd;
