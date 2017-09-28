@@ -1,46 +1,39 @@
-<!-- Powered by Jackeriss (http://www.jackeriss.com) -->
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Top 15</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/static/css/iframe.css?t=2017-09-28 13:37:28" rel="stylesheet">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://i.loli.net/2017/08/13/599071cb7628b.png">
-    <link rel="shortcut icon" href="https://i.loli.net/2017/08/13/599071cb7628b.png">
-  </head>
-  <body>
-    <input type="hidden" id="user_id" value="{{ escape(arguments['user_id']) }}" />
-    <input type="hidden" id="object_type" value="{{ escape(arguments['object_type']) }}" />
-    <input type="hidden" id="group_type" value="{{ escape(arguments['group_type']) }}" />
-    <input type="hidden" id="order_by" value="{{ escape(arguments['order_by']) }}" />
-    <input type="hidden" id="tag" value="{{ escape(arguments['tag']) }}" />
-    <div class="spinner">
-      <div class="spinner-container container1">
-        <div class="circle1"></div>
-        <div class="circle2"></div>
-        <div class="circle3"></div>
-        <div class="circle4"></div>
-      </div>
-      <div class="spinner-container container2">
-        <div class="circle1"></div>
-        <div class="circle2"></div>
-        <div class="circle3"></div>
-        <div class="circle4"></div>
-      </div>
-      <div class="spinner-container container3">
-        <div class="circle1"></div>
-        <div class="circle2"></div>
-        <div class="circle3"></div>
-        <div class="circle4"></div>
-      </div>
-    </div>
-    <div class="waiting"></div>
-    <div class="noMatch dn">没有符合条件的项目</div>
-    <div class="page page-items page-list dn">
-    </div>
-    <script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
-    <script src="/static/js/iframe.js?t=2017-09-28 13:37:02"></script>
-    <script src="/static/js/baidu_tongji.js"></script>
-  </body>
-</html>
+{% extends base.html %}
+{% block head %}
+<link href="/static/css/iframe.css?t=2017-09-28 14:07:39" rel="stylesheet"/>
+{% end %}
+{% block section %}
+<input type="hidden" id="user_id" value="{{ escape(arguments['user_id']) }}" />
+<input type="hidden" id="object_type" value="{{ escape(arguments['object_type']) }}" />
+<input type="hidden" id="group_type" value="{{ escape(arguments['group_type']) }}" />
+<input type="hidden" id="order_by" value="{{ escape(arguments['order_by']) }}" />
+<input type="hidden" id="tag" value="{{ escape(arguments['tag']) }}" />
+<div class="spinner">
+  <div class="spinner-container container1">
+    <div class="circle1"></div>
+    <div class="circle2"></div>
+    <div class="circle3"></div>
+    <div class="circle4"></div>
+  </div>
+  <div class="spinner-container container2">
+    <div class="circle1"></div>
+    <div class="circle2"></div>
+    <div class="circle3"></div>
+    <div class="circle4"></div>
+  </div>
+  <div class="spinner-container container3">
+    <div class="circle1"></div>
+    <div class="circle2"></div>
+    <div class="circle3"></div>
+    <div class="circle4"></div>
+  </div>
+</div>
+<div class="waiting"></div>
+<div class="noMatch dn">没有符合条件的项目</div>
+<div class="page page-items page-list dn">
+</div>
+{% end %}
+{% block script %}
+<script src="/static/js/iframe.js?t=2017-09-28 14:07:52" type="javascript"></script>
+{% end %}
+{% end %}
