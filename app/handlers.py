@@ -67,8 +67,7 @@ class SpiderHandler(web.RequestHandler):
         else:
             if key in handling:
                 options.handling.remove(key)
-            with open(file_path, 'r') as items_file:
-                items = json.loads(items_file.read())
+            items = json.load(open(file_path, 'r'))
             if datetime.now().strftime('%Y-%m-%d') != items[0]:
                 yield grab(user_id=user_id, object_type=object_type,
                            group_type=group_type, order_by=order_by, tag=tag)
@@ -80,7 +79,5 @@ class SpiderHandler(web.RequestHandler):
         self.write(respon_json)
 
     def write_error(self, status_code, **kwargs):
-        if status_code == 404:
-            self.render('error.html', code='404')
-        else:
-            self.render('error.html', code='500')
+        respon_json = escape.json_encode('404')
+        self.write(respon_json)
