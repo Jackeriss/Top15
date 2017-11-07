@@ -34,7 +34,8 @@ $(function() {
   });
   $('#submit_button').on('click', function() {
     window.open('/iframe?user_id=' + user_id + '&object_type=' + object_type + '&group_type=' + group_type + '&order_by=' + order_by + '&tag=' + tag);
-    $('.many_lines').text('<!-- [Top15]在要展示的位置插入如下代码： -->\n\
+    $('.many_lines').text('<!-- [Top15] https://top15.jackeriss.com -->\n\
+<!-- 在要展示的位置插入如下代码： -->\n\
 <script type="text/javascript">\n\
   function initIframe(){\n\
     var iframe = document.getElementById("top15_iframe");\n\
