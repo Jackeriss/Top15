@@ -26,19 +26,13 @@ $(function() {
           $('.page').addClass('dn');
           $('.spinner').addClass('dn');
           $('.waiting').addClass('dn');
-          $('.noMatch').fadeIn(800, function() {
-            $('.noMatch').removeClass('dn');
-          });
+          $('.noMatch').removeClass('dn');
         } else {
           if (data == 'wait') {
             $('.page').addClass('dn');
             $('.noMatch').addClass('dn');
-            $('.spinner').fadeIn(800, function() {
-              $('.spinner').removeClass('dn');
-            });
-            $('.waiting').fadeIn(800, function() {
-              $('.waiting').removeClass('dn');
-            });
+            $('.spinner').removeClass('dn');
+            $('.waiting').removeClass('dn');
             setTimeout(function() {
               Loop_ajax();
             }, 1000);
@@ -46,9 +40,6 @@ $(function() {
             $('.noMatch').addClass('dn');
             $('.spinner').addClass('dn');
             $('.waiting').addClass('dn');
-            $('.page').fadeIn(800, function() {
-              $('.page').removeClass('dn');
-            });
             var resultStr = '<ul>',
               starStr = ''
             for (var i = 1; i < data.length; i++) {
@@ -74,6 +65,9 @@ $(function() {
             }
             resultStr += '</ul>';
             $('.page').html(resultStr);
+            setTimeout(function() {
+              $('.page').removeClass('dn');
+            }, 500);
           }
         }
       }

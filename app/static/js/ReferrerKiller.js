@@ -135,7 +135,7 @@ var ReferrerKiller = (function () {
 			.page-list-cover {\
 			  position: relative;\
 			  overflow: hidden;\
-			  background: #fafafa;\
+			  background: #fff;\
 			  padding-top: 146.6666666%;\
 				width: ' + width + 'px;\
 			  height: '+ width * 1.47 + 'px;\

@@ -32,19 +32,11 @@ $(function() {
       $('#submit_button').attr("disabled", true);
     }
   });
-  $('.js_button').on('click', function() {
-    if ($(this).attr("id") == 'submit_button') {
-      submit_down = 0;
-      window.open('/iframe?user_id=' + user_id + '&object_type=' + object_type + '&group_type=' + group_type + '&order_by=' + order_by + '&tag=' + tag);
-    } else {
-      $('.j_button').removeClass("active");
-      $(this).addClass("active");
-    }
-    if (submit_down == 0) {
-      $('.many_lines').text('<!-- Top15 JavaScript版 -->\n\
-<!-- 在要展示的位置插入如下代码： -->\n\
+  $('#submit_button').on('click', function() {
+    window.open('/iframe?user_id=' + user_id + '&object_type=' + object_type + '&group_type=' + group_type + '&order_by=' + order_by + '&tag=' + tag);
+    $('.many_lines').text('<!-- [Top15]在要展示的位置插入如下代码： -->\n\
 <script type="text/javascript">\n\
-  function reinitIframe(){\n\
+  function initIframe(){\n\
     var iframe = document.getElementById("top15_iframe");\n\
     try {\n\
       if (iframe.offsetWidth < 768) {\n\
@@ -58,33 +50,6 @@ $(function() {
   }\n\
   reinitIframe();\n\
 </script>\n\
-<iframe id="top15_iframe" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" width="100%" src="https://top15.jackeriss.com/iframe?user_id=' + user_id + '&object_type=' + object_type + '&group_type=' + group_type + '&order_by=' + order_by + '&tag=' + tag + '"></iframe>');
-    }
-  });
-  $('.jq_button').on('click', function() {
-    $('.j_button').removeClass("active");
-    $(this).addClass("active");
-    if (submit_down == 0) {
-      $('.many_lines').text('<!-- Top15 JQuery版 -->\n\
-<!-- 在要展示的位置插入如下代码： -->\n\
-<script type="text/javascript">\n\
-  $(function () {\n\
-    var iframe = document.getElementById("top15_iframe");\n\
-    function reinitIframe(){\n\
-      try {\n\
-        if (iframe.offsetWidth < 768) {\n\
-          iframe.height = (iframe.offsetWidth * 0.3 * 1.47 + 65) * 5;\n\
-        }\n\
-        else {\n\
-          iframe.height = (iframe.offsetWidth * 0.16 * 1.47 + 65) * 3;\n\
-        }\n\
-      }\n\
-      catch (ex){}\n\
-    }\n\
-    iframe.onload = reinitIframe();\n\
-  });\n\
-</script>\n\
-<iframe id="top15_iframe" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" width="100%" src="https://top15.jackeriss.com/iframe?user_id=' + user_id + '&object_type=' + object_type + '&group_type=' + group_type + '&order_by=' + order_by + '&tag=' + tag + '"></iframe>');
-    }
+<iframe onload="initIframe();" id="top15_iframe" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" width="100%" src="https://top15.jackeriss.com/iframe?user_id=' + user_id + '&object_type=' + object_type + '&group_type=' + group_type + '&order_by=' + order_by + '&tag=' + tag + '"></iframe>');
   });
 });
