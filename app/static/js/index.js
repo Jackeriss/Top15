@@ -48,7 +48,6 @@ $(function() {
     }\n\
     catch (ex){}\n\
   }\n\
-  reinitIframe();\n\
 </script>\n\
 <iframe onload="initIframe();" id="top15_iframe" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" width="100%" src="https://top15.jackeriss.com/iframe?user_id=' + user_id + '&object_type=' + object_type + '&group_type=' + group_type + '&order_by=' + order_by + '&tag=' + tag + '"></iframe>');
   });
