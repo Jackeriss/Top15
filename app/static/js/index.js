@@ -40,10 +40,10 @@ $(function() {
     var iframe = document.getElementById("top15_iframe");\n\
     try {\n\
       if (iframe.offsetWidth < 768) {\n\
-        iframe.height = (iframe.offsetWidth * 0.3 * 1.47 + 65) * 5;\n\
+        iframe.height = (iframe.offsetWidth * 0.3 * 1.47 + 85) * 5;\n\
       }\n\
       else {\n\
-        iframe.height = (iframe.offsetWidth * 0.16 * 1.47 + 65) * 3;\n\
+        iframe.height = (iframe.offsetWidth * 0.16 * 1.47 + 85) * 3;\n\
       }\n\
     }\n\
     catch (ex){}\n\
