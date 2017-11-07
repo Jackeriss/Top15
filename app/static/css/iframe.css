@@ -38,27 +38,6 @@
   text-decoration: none;
 }
 
-.page-list-cover {
-  position: relative;
-  overflow: hidden;
-  background: #fafafa;
-  padding-top: 146.6666666%;
-  display: block;
-}
-
-.music-cover {
-  padding-top: 100%;
-}
-
-.page-list-cover img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
 .page-list-info {
   overflow: hidden;
   height: 45px;

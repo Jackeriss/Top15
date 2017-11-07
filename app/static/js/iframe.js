@@ -68,8 +68,8 @@ $(function() {
               } else {
                 starStr = '<span class="page-list-star page-list-star-gray"></span><span class="page-list-star page-list-star-gray"></span><span class="page-list-star page-list-star-gray"></span><span class="page-list-star page-list-star-gray"></span><span class="page-list-star page-list-star-gray"></span>'
               }
-              resultStr += ('<li><a href="' + data[i].link + '"><div class="' + coverStr + '"><img src="' + data[i].image +
-                '" class="display:block"></div></a><div class="page-list-info"><h3>' + data[i].title +
+              resultStr += ('<li><a href="' + data[i].link + '">' + ReferrerKiller.imageHtml(data[i].image, {'class': coverStr}) +
+                '</a><div class="page-list-info"><h3>' + data[i].title +
                 '</h3><p class="page-list-rank"><span class="page-list-stars">' + starStr + '</span><span>' + data[i].rating + '</span></p></div></li>');
             }
             resultStr += '</ul>';
