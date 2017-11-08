@@ -38,18 +38,20 @@ $(function() {
 <!-- 在要展示的位置插入如下代码： -->\n\
 <script type="text/javascript">\n\
   function initIframe(){\n\
-    var iframe = document.getElementById("top15_iframe");\n\
-    try {\n\
-      if (iframe.offsetWidth < 768) {\n\
-        iframe.height = (iframe.offsetWidth * 0.3 * 1.47 + 85) * 5;\n\
+    setTimeout(function() {\n\
+      var iframe = document.getElementById("top15_iframe");\n\
+      try {\n\
+        if (iframe.offsetWidth < 768) {\n\
+          iframe.height = (iframe.offsetWidth * 0.3 * 1.47 + 85) * 5;\n\
+        }\n\
+        else {\n\
+          iframe.height = (iframe.offsetWidth * 0.16 * 1.47 + 85) * 3;\n\
+        }\n\
       }\n\
-      else {\n\
-        iframe.height = (iframe.offsetWidth * 0.16 * 1.47 + 85) * 3;\n\
-      }\n\
-    }\n\
-    catch (ex){}\n\
+      catch (ex){}\n\
+    }, 500);\n\
   }\n\
 </script>\n\
-<iframe onload="initIframe();" id="top15_iframe" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" width="100%" src="https://top15.jackeriss.com/iframe?user_id=' + user_id + '&object_type=' + object_type + '&group_type=' + group_type + '&order_by=' + order_by + '&tag=' + tag + '"></iframe>');
+<iframe onload="initIframe();" id="top15_iframe" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" width="100%" height="2012px" src="https://top15.jackeriss.com/iframe?user_id=' + user_id + '&object_type=' + object_type + '&group_type=' + group_type + '&order_by=' + order_by + '&tag=' + tag + '"></iframe>');
   });
 });
