@@ -1,7 +1,7 @@
 import os
 import ssl
 import json
-from datetime import datetime
+import time
 
 from bs4 import BeautifulSoup
 from tornado import httpclient, gen
@@ -39,7 +39,7 @@ def grab(user_id, object_type, group_type, order_by, tag):
         options.config['root_path'], 'data',
         ' '.join((user_id, object_type, group_type, order_by, tag)) + '.json')
     client = httpclient.AsyncHTTPClient()
-    items = [datetime.now().strftime('%Y-%m-%d')]
+    items = [time.strftime('%Y-%m-%d', time.localtime(time.time()))]
     try:
         response = yield safty_fetch(client.fetch(url,
                                                   method='GET',

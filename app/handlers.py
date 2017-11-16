@@ -1,6 +1,6 @@
 import os
 import json
-from datetime import datetime
+import time
 
 from tornado import web, gen, escape
 from tornado.options import options
@@ -68,7 +68,7 @@ class SpiderHandler(web.RequestHandler):
             if key in handling:
                 options.handling.remove(key)
             items = json.load(open(file_path, 'r'))
-            if datetime.now().strftime('%Y-%m-%d') != items[0]:
+            if time.strftime('%Y-%m-%d', time.localtime(time.time())) != items[0]:
                 yield grab(user_id=user_id, object_type=object_type,
                            group_type=group_type, order_by=order_by, tag=tag)
             if len(items) <= 1:
