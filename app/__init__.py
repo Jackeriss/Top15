@@ -8,10 +8,10 @@ from tornado.options import define, options
 
 from config import DEV_CONFIG, PROD_CONFIG
 from .log_kit import LogFilter
-from .handlers import (PageNotFoundHandler,
-                       IndexHandler,
-                       IframeHandler,
-                       SpiderHandler)
+from .handler import (PageNotFoundHandler,
+                      IndexHandler,
+                      IframeHandler,
+                      SpiderHandler)
 
 def create_app():
     '''Create APP'''
@@ -63,7 +63,7 @@ def create_app():
         type=list)
 
     settings = dict(
-        template_path=os.path.join(os.path.dirname(__file__), 'templates'),
+        template_path=os.path.join(os.path.dirname(__file__), 'template'),
         static_path=os.path.join(os.path.dirname(__file__), 'static'),
         debug=options.config['debug'],
         gzip=True,
