@@ -69,11 +69,11 @@ def create_app():
         gzip=True,
     )
     app = web.Application([
-        (r'/', IndexHandler),
-        (r'/iframe', IframeHandler),
-        (r'/spider', SpiderHandler),
-        (r'/((js|css|image)/.*)', web.StaticFileHandler, dict(path=settings['static_path'])),
-        (r'/(.*\.txt)', web.StaticFileHandler, dict(path=settings['static_path'])),
-        ('.*', PageNotFoundHandler)
+        (r'/top15', IndexHandler),
+        (r'/top15/iframe', IframeHandler),
+        (r'/top15/spider', SpiderHandler),
+        (r'/top15/((js|css|image)/.*)', web.StaticFileHandler, dict(path=settings['static_path'])),
+        (r'/top15/(.*\.txt)', web.StaticFileHandler, dict(path=settings['static_path'])),
+        (r'/top15/.*', PageNotFoundHandler)
         ], **settings)
     return app
