@@ -7,7 +7,7 @@
 ![1](https://ooo.0o0.ooo/2017/03/15/58c92e93422a7.jpg)
 
 ## Introduction
-1. 在 [https://top15.jackeriss.com](https://top15.jackeriss.com) 填写信息并生成展示页面
+1. 在 [https://www.jackeriss.com/top15](https://www.jackeriss.com/top15) 填写信息并生成展示页面
 2. 将调用展示页面的代码粘贴至要展示位置
 3. 第一次生成展示页面需要一段时间获取数据，之后数据会暂存于服务器，无需再次获取
 4. 展示数据天更新一次
