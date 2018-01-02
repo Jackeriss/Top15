@@ -34,7 +34,7 @@ $(function() {
   });
   $('#submit_button').on('click', function() {
     window.open('/iframe?user_id=' + user_id + '&object_type=' + object_type + '&group_type=' + group_type + '&order_by=' + order_by + '&tag=' + tag);
-    $('.many_lines').text('<!-- [Top15] https://top15.jackeriss.com -->\n\
+    $('.many_lines').text('<!-- [Top15] https://www.jackeriss.com/top15-->\n\
 <!-- 在要展示的位置插入如下代码： -->\n\
 <script type="text/javascript">\n\
   function initIframe(){\n\
@@ -52,6 +52,6 @@ $(function() {
     }, 500);\n\
   }\n\
 </script>\n\
-<iframe onload="initIframe();" id="top15_iframe" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" width="100%" height="2012px" src="https://top15.jackeriss.com/iframe?user_id=' + user_id + '&object_type=' + object_type + '&group_type=' + group_type + '&order_by=' + order_by + '&tag=' + tag + '"></iframe>');
+<iframe onload="initIframe();" id="top15_iframe" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" width="100%" height="2012px" src="https://www.jackeriss.com/top15/iframe?user_id=' + user_id + '&object_type=' + object_type + '&group_type=' + group_type + '&order_by=' + order_by + '&tag=' + tag + '"></iframe>');
   });
 });
