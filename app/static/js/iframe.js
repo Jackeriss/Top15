@@ -12,7 +12,7 @@ $(function() {
   function Loop_ajax() {
     $.ajax({
       type: 'post',
-      url: '/spider',
+      url: '/top15/spider',
       data: {
         user_id: user_id,
         object_type: object_type,

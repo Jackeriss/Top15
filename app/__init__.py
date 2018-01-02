@@ -74,6 +74,6 @@ def create_app():
         (r'/top15/spider', SpiderHandler),
         (r'/top15/((js|css|image)/.*)', web.StaticFileHandler, dict(path=settings['static_path'])),
         (r'/top15/(.*\.txt)', web.StaticFileHandler, dict(path=settings['static_path'])),
-        (r'/top15/.*', PageNotFoundHandler)
+        (r'.*', PageNotFoundHandler)
         ], **settings)
     return app

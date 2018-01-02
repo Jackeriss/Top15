@@ -33,7 +33,7 @@ $(function() {
     }
   });
   $('#submit_button').on('click', function() {
-    window.open('/iframe?user_id=' + user_id + '&object_type=' + object_type + '&group_type=' + group_type + '&order_by=' + order_by + '&tag=' + tag);
+    window.open('/top15/iframe?user_id=' + user_id + '&object_type=' + object_type + '&group_type=' + group_type + '&order_by=' + order_by + '&tag=' + tag);
     $('.many_lines').text('<!-- [Top15] https://www.jackeriss.com/top15-->\n\
 <!-- 在要展示的位置插入如下代码： -->\n\
 <script type="text/javascript">\n\
